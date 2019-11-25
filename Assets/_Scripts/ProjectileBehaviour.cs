@@ -8,18 +8,15 @@ namespace LATwo
     {
         public Projectile Settings { get; set; }
         public GameObject HitEffect { get; set; }
+        public Sprite Sprite { set => renderer.sprite = value; }
         
         [SerializeField]
         protected Rigidbody2D body;
-#if UNITY_EDITOR
         [SerializeField]
-        Projectile fallbackSettings;
-#endif
+        protected new SpriteRenderer renderer;
+
         private void OnEnable()
         {
-#if UNITY_EDITOR
-            Settings = (Settings)? Settings: fallbackSettings;
-#endif
             if (Settings == null)
             {
                 gameObject.SetActive(false);
@@ -34,9 +31,9 @@ namespace LATwo
             if (!Settings.homing)
                 return;
             //homing missiles should change trajectory around z axis (rotation);
-            float angle = Vector2.Angle(transform.up, PlayerController.Position - body.position);
+            float angle = Vector2.SignedAngle(transform.up, (PlayerController.Position - body.position).normalized);
             //the angle betwee the movement and shit.
-            body.rotation += Mathf.Clamp((angle > 0? 1 : -1) * Settings.turnSpeed * Time.deltaTime, -angle, angle);
+            body.rotation += (angle > 0? 1 : -1) * Mathf.Clamp(Settings.turnSpeed * Time.deltaTime, 0f, Mathf.Abs(angle));
             print(angle);
             body.velocity = Settings.speed * transform.up; //update velocity
         }
@@ -44,7 +41,7 @@ namespace LATwo
         IEnumerator EndLifeTime()
         {
             yield return new WaitForSeconds(Settings.lifeTime);
-            Message<ProjectileBehaviour>.Raise(this); //TODO: register this in the pool
+            Message<ReturnToPool<ProjectileBehaviour>>.Raise(this); //TODO: register this in the pool
         }
 
         private void OnDisable()
@@ -62,7 +59,7 @@ namespace LATwo
             {
                 //...
             }
-            Message<ProjectileBehaviour>.Raise(this);
+            Message<ReturnToPool<ProjectileBehaviour>>.Raise(this);
         }
     }
 }

@@ -24,8 +24,8 @@ namespace LATwo
             }
         }
 
-        private void OnEnable() { Message<T>.Add(ReturnObjectToPool); }
-        private void OnDisable(){ Message<T>.Remove(ReturnObjectToPool); }
+        private void OnEnable() { Message<ReturnToPool<T>>.Add(ReturnObjectToPool); }
+        private void OnDisable(){ Message<ReturnToPool<T>>.Remove(ReturnObjectToPool); }
 
         public T GetPoolObject()
         {
@@ -37,9 +37,17 @@ namespace LATwo
             return null;
         }
 
-        public void ReturnObjectToPool(T obj)
+        public void ReturnObjectToPool(ReturnToPool<T> obj)
         {
             pooledObjects.Enqueue(obj);
         }
+    }
+
+    public struct ReturnToPool<T>
+    {
+        public T value;
+
+        public static implicit operator ReturnToPool<T>(T obj) { return new ReturnToPool<T>() { value = obj }; }
+        public static implicit operator T(ReturnToPool<T> obj) { return obj.value; }
     }
 }

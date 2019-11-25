@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1323643047}
-  fallbackSettings: {fileID: 11400000, guid: baa32e9b1808ef74e8ad9e72d21523ab, type: 2}
+  renderer: {fileID: 1323643049}
 --- !u!212 &1323643049
 SpriteRenderer:
   m_ObjectHideFlags: 0
