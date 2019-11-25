@@ -39,6 +39,7 @@ namespace LATwo
 
         public void ReturnObjectToPool(ReturnToPool<T> obj)
         {
+            print("hello world"); 
             pooledObjects.Enqueue(obj);
         }
     }

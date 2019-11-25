@@ -6,10 +6,16 @@ namespace LATwo
 {
     public class ProjectileBehaviour : MonoBehaviour
     {
-        public Projectile Settings { get; set; }
-        public GameObject HitEffect { get; set; }
-        public Sprite Sprite { set => renderer.sprite = value; }
-        
+        public Projectile Settings
+        {
+            get { return settings; }
+            set {
+                settings = value;
+                renderer.sprite = settings.sprite;
+            }
+        }
+        protected Projectile settings;
+
         [SerializeField]
         protected Rigidbody2D body;
         [SerializeField]
@@ -41,7 +47,9 @@ namespace LATwo
         IEnumerator EndLifeTime()
         {
             yield return new WaitForSeconds(Settings.lifeTime);
-            Message<ReturnToPool<ProjectileBehaviour>>.Raise(this); //TODO: register this in the pool
+            if (Settings.hitEffect)
+                Instantiate(Settings.hitEffect, transform.position, Quaternion.identity);
+            Message<ReturnToPool<ProjectileBehaviour>>.Raise(this); 
         }
 
         private void OnDisable()
@@ -51,14 +59,8 @@ namespace LATwo
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            //TODO: set up layers so it ONLY collides with the player.
-            //send a message (yikes)
-            //do the hitEffect thingy.
-            //disables this and notify the pool
-            if(HitEffect)
-            {
-                //...
-            }
+            if(Settings.hitEffect)
+                Instantiate(Settings.hitEffect, transform.position, Quaternion.identity);
             Message<ReturnToPool<ProjectileBehaviour>>.Raise(this);
         }
     }

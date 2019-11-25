@@ -4,17 +4,27 @@ using UnityEngine;
 
 namespace LATwo
 {
-    public class EnemyBehaviour : MonoBehaviour
+    public class EnemyBehaviour : Entity
     {
-        [SerializeField]
+        //i like properties
+        public Enemy Settings {
+            private get { return settings; }
+            set {
+                settings = value;
+                currentHealth = settings.health;
+                this.Sprite = settings.sprite;
+            }
+        }
         protected Enemy settings;
-        
-        //the target basically
-        public Transform Player { get; set; }
 
         void Die()
         {
-            Message<EnemyBehaviour>.Raise(this);
+            Message<ReturnToPool<EnemyBehaviour>>.Raise(this);
+        }
+
+        private void Update()
+        {
+            //Movement and shooting.
         }
 
     }
