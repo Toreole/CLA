@@ -2,7 +2,7 @@ using System;
 
 namespace LATwo
 {
-    public class Message<T> //i hate this. its ugly. its weird. its dumb.
+    public class Message<T> //! i hate this. its ugly. its weird. its dumb.
     {
         // public static Instance of the Message Object itself, so we can access it from everywhere
         // has a generic parameter, so we can basically use every custom type as parameter
