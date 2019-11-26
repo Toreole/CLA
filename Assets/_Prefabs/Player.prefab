@@ -48,6 +48,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 6294749525331609796}
   renderer: {fileID: 6294749525331609798}
+  horizontalInput: Horizontal
+  verticalInput: Vertical
+  fire: LeftClick
+  maxHealth: 100
+  positiveSpeed: 5
+  negativeSpeed: 3
+  projectile: {fileID: 11400000, guid: d2f810a3b5ee8564e988976497462421, type: 2}
+  attackRate: 0.4
+  cam: {fileID: 0}
 --- !u!50 &6294749525331609796
 Rigidbody2D:
   serializedVersion: 4

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41180d1f93e072047a385a9ef2acb426, type: 3}
-  m_Name: BasicProjectile
+  m_Name: AnotherBasicOne
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 1933421e43178534c8faf5b785851cd3, type: 3}
-  tint: {r: 1, g: 0.913118, b: 0.4009434, a: 1}
-  damage: 1
-  speed: 5
+  sprite: {fileID: 21300000, guid: f6ed6c0675f16bb4bb1e31c35130ad0b, type: 3}
+  tint: {r: 0.39042726, g: 0.9150943, b: 0.34100214, a: 1}
+  damage: 2
+  speed: 7
   homing: 0
   turnSpeed: 0
   lifeTime: 2

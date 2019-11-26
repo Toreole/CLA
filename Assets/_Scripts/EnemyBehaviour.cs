@@ -53,10 +53,7 @@ namespace LATwo
                 return;
             if(Time.time - lastShotTime >= settings.attackRate)
             {
-                var proj = ProjectilePool.GetPoolObject();
-                proj.Settings = settings.projectile;
-                proj.Position = transform.position;
-                proj.gameObject.SetActive(true);
+                ProjectilePool.GetPoolObject().Init(settings.projectile, gameObject);
                 lastShotTime = Time.time;
             }
         }

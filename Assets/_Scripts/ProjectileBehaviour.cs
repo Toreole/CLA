@@ -23,6 +23,15 @@ namespace LATwo
         [SerializeField]
         protected new SpriteRenderer renderer;
 
+        public void Init(Projectile settings, GameObject context)
+        {
+            gameObject.layer = context.layer;
+            transform.up = context.transform.up;
+            this.Settings = settings;
+            transform.position = context.transform.position;
+            gameObject.SetActive(true);
+        }
+
         private void OnEnable()
         {
             if (Settings == null)
@@ -51,6 +60,7 @@ namespace LATwo
             yield return new WaitForSeconds(Settings.lifeTime);
             if (Settings.hitEffect)
                 Instantiate(Settings.hitEffect, transform.position, Quaternion.identity);
+            print("die");
             Message<ReturnToPool<ProjectileBehaviour>>.Raise(this); 
         }
 

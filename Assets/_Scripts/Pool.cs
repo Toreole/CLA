@@ -20,8 +20,7 @@ namespace LATwo
             //activeObjects = new HashSet<T>();
             for (int i = 0; i < amountOfObjects; i++)
             {
-                var obj = Instantiate(prefab);
-                obj.SetActive(false);
+                var obj = Instantiate(prefab, transform);
                 pooledObjects.Enqueue(obj.GetComponent<T>());
             }
         }
@@ -49,7 +48,8 @@ namespace LATwo
 
         public void ReturnObjectToPool(ReturnToPool<T> obj)
         {
-            print("hello world"); 
+            print("hello world");
+            obj.value.gameObject.SetActive(false);
             pooledObjects.Enqueue(obj); 
         }
     }
