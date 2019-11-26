@@ -17,6 +17,8 @@ namespace LATwo
         }
         protected Enemy settings;
 
+        protected float lastShotTime;
+
         void Die()
         {
             Message<ReturnToPool<EnemyBehaviour>>.Raise(this);
