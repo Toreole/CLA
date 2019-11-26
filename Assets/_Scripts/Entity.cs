@@ -12,5 +12,16 @@ namespace LATwo
         public Sprite Sprite { set { renderer.sprite = value; } }
 
         protected float currentHealth;
+
+        public void Damage(float amount)
+        {
+            currentHealth -= amount;
+            if(currentHealth <= 0)
+            {
+                Die();
+            }
+        }
+
+        protected abstract void Die();
     }
 }

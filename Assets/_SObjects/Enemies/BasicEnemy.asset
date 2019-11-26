@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfbc773501a7e8d4cb9de51e30372c1d, type: 3}
   m_Name: BasicEnemy
   m_EditorClassIdentifier: 
-  speed: 0
-  health: 0
-  attackRate: 0
+  sprite: {fileID: 21300000, guid: 670a087a21081c84581939c64ba8feca, type: 3}
+  tint: {r: 1, g: 0.23113209, b: 0.79433745, a: 1}
+  pointValue: 2
+  speed: 1
+  health: 1
+  attackRate: 1
+  attackRange: 10
   movePattern: 0
   preferredStrafeDistance: 0
-  projectile: {fileID: 0}
+  strafeTolerance: 0.5
+  strafeSpeed: 0
+  projectile: {fileID: 11400000, guid: d2f810a3b5ee8564e988976497462421, type: 2}

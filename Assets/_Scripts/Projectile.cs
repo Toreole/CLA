@@ -11,6 +11,7 @@ namespace LATwo
     public class Projectile : ScriptableObject
     {
         public Sprite sprite;
+        public Color tint;
         public float damage;
         public float speed;
         public bool homing;

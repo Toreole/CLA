@@ -12,8 +12,10 @@ namespace LATwo
             set {
                 settings = value;
                 renderer.sprite = settings.sprite;
+                renderer.color = settings.tint;
             }
         }
+        public Vector2 Position { set => transform.position = value; }
         protected Projectile settings;
 
         [SerializeField]
@@ -34,7 +36,7 @@ namespace LATwo
 
         private void FixedUpdate()
         {
-            if (!Settings.homing)
+            if (!Settings.homing) //! homing projectiles only used by enemies, not by the player.
                 return;
             //homing missiles should change trajectory around z axis (rotation);
             float angle = Vector2.SignedAngle(transform.up, (PlayerController.Position - body.position).normalized);
@@ -59,6 +61,9 @@ namespace LATwo
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            var entity = collision.gameObject.GetComponent<Entity>();
+            if (entity)
+                entity.Damage(settings.damage);
             if(Settings.hitEffect)
                 Instantiate(Settings.hitEffect, transform.position, Quaternion.identity);
             Message<ReturnToPool<ProjectileBehaviour>>.Raise(this);

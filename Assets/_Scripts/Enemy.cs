@@ -9,13 +9,17 @@ namespace LATwo
     public class Enemy : ScriptableObject
     {
         public Sprite sprite;
+        public Color tint;
         public float pointValue;
         public float speed;
         public float health;
         public float attackRate;
+        public float attackRange;
         public MovementType movePattern;
         public float preferredStrafeDistance;
-        public Projectile projectile;
+        public float strafeTolerance = 0.5f;
+        public float strafeSpeed;
+        public Projectile projectile; 
     }
 
     public enum MovementType

@@ -3,12 +3,14 @@ using System.Collections;
 
 namespace LATwo
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Entity
     {
         public static Vector2 Position { get; private set; } //hacky but necessary
 
-        [SerializeField]
-        protected Rigidbody2D body;
+        protected override void Die()
+        {
+            throw new System.NotImplementedException();
+        }
 
         private void FixedUpdate()
         {

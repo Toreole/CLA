@@ -12,6 +12,8 @@ namespace LATwo
         Queue<T> pooledObjects;
         //HashSet<T> activeObjects;
 
+        protected static Pool<T> _instance;
+
         protected virtual void Start()
         {
             pooledObjects = new Queue<T>();
@@ -24,10 +26,10 @@ namespace LATwo
             }
         }
 
-        private void OnEnable() { Message<ReturnToPool<T>>.Add(ReturnObjectToPool); }
-        private void OnDisable(){ Message<ReturnToPool<T>>.Remove(ReturnObjectToPool); }
+        private void OnEnable() { Message<ReturnToPool<T>>.Add(ReturnObjectToPool); _instance = this; }
+        private void OnDisable(){ Message<ReturnToPool<T>>.Remove(ReturnObjectToPool); _instance = null; }
 
-        public T GetPoolObject()
+        public T M_GetPoolObject()
         {
             if (pooledObjects.Count > 0)
                 return pooledObjects.Dequeue();
@@ -37,16 +39,26 @@ namespace LATwo
             return null;
         }
 
+        public static T GetPoolObject()
+        {
+            if (_instance)
+                return _instance.M_GetPoolObject();
+            Debug.LogError("No pool of this type in the scene:" + typeof(T).ToString());
+            return null;
+        }
+
         public void ReturnObjectToPool(ReturnToPool<T> obj)
         {
             print("hello world"); 
-            pooledObjects.Enqueue(obj);
+            pooledObjects.Enqueue(obj); 
         }
     }
 
-    public struct ReturnToPool<T>
+    public struct ReturnToPool<T> where T : MonoBehaviour
     {
         public T value;
+
+        public Transform transform => value.transform;
 
         public static implicit operator ReturnToPool<T>(T obj) { return new ReturnToPool<T>() { value = obj }; }
         public static implicit operator T(ReturnToPool<T> obj) { return obj.value; }

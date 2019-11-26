@@ -1,17 +1,25 @@
-Enemy/Bullet Prefab
-SOs for enemy/bullet settings n stuff
-basic player controller
-	shoot towards mouse position
+----- TODO -----
 
-highscore - name & score (local)
-level system 
-wave system for enemies
-	detect when all waves are done
+> basic player controller
+	> shoot towards mouse position
 
-pool enemies and bullets for performance i guess
-main menu
+> level system 
+> wave system for enemies
+	> detect when all waves are done
 
-secondary camera with rendertexture for some cool shit i suppose
-	only if the player isnt in range for a boss or some event
+> highscore - name & score (local)
 
+> main menu
+
+> secondary camera with rendertexture for some cool shit i suppose
+	> only if the player isnt in range for a boss or some event
+
+
+
+----- COMPLETED -----
+
+> Enemy/Bullet Prefab
+> SOs for enemy/bullet settings n stuff
+
+> pool enemies and bullets for performance i guess
 
