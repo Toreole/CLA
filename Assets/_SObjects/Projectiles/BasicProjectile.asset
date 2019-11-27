@@ -15,7 +15,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 1933421e43178534c8faf5b785851cd3, type: 3}
   tint: {r: 1, g: 0.913118, b: 0.4009434, a: 1}
   damage: 1
-  speed: 5
+  speed: 8
   homing: 0
   turnSpeed: 0
   lifeTime: 2
