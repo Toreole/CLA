@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfbc773501a7e8d4cb9de51e30372c1d, type: 3}
+  m_Name: StrafeEnemy
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 41501e7a69e7aa64d951c8ccafb66c75, type: 3}
+  tint: {r: 0.9245283, g: 0.16135636, b: 0.16135636, a: 1}
+  pointValue: 4
+  speed: 1
+  health: 5
+  attackRate: 1
+  attackRange: 20
+  movePattern: 1
+  preferredStrafeDistance: 10
+  strafeTolerance: 0.2
+  strafeSpeed: 40
+  projectile: {fileID: 11400000, guid: 0ef48a1456393b741b0730a9b97db4f8, type: 2}

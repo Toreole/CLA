@@ -10,10 +10,24 @@ namespace LATwo
 
         protected int totalEnemies;
 
-        private void Start()
+        private IEnumerator Start()
         {
             foreach (var x in waves)
                 totalEnemies += x.amount;
+
+            foreach(Wave wave in waves)
+            {
+                for(int i = 0; i < wave.amount; i++)
+                {
+                    var enemy = EnemyPool.GetPoolObject();
+                    enemy.Settings = wave.enemyType;
+                    Vector2 direction = Random.insideUnitCircle.normalized;
+                    Vector2 offset = Mathf.Lerp(wave.minDistance, wave.maxDistance, Random.value) * direction;
+                    enemy.transform.position = PlayerController.Position + offset;
+                    enemy.gameObject.SetActive(true);
+                }
+                yield return new WaitForSeconds(wave.time);
+            }
         }
 
         //this is what spawns the waves and detects whether its been completed yet.
@@ -26,6 +40,7 @@ namespace LATwo
             public Enemy enemyType;
             public int amount;
             public float time;
+            public float minDistance, maxDistance;
         }
     }
 }

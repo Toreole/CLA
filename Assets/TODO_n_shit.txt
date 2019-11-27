@@ -1,10 +1,18 @@
 ----- TODO -----
 
-> basic player controller
+> basic player controller 
 	> shoot towards mouse position
+		> for some reason movemen isnt working properly, it moves without input, against input
+		> the positive/negative speed feels extremely clunky and weird on keyboard, remove it
+
+		>>> Make projectiles trigger colliders, dont move with rigidbody, kinda unnecessary i guess.
+
+		> same shit, but for enemies.
+			> also: improve spawn code for enemies, its kinda ugly lmao
 
 > level system 
 > wave system for enemies
+		> spawn delay for enemies, maybe some nice effect to show that things are spawning...
 	> detect when all waves are done
 
 > highscore - name & score (local)
