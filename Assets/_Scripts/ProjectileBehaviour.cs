@@ -60,7 +60,7 @@ namespace LATwo
             yield return new WaitForSeconds(Settings.lifeTime);
             if (Settings.hitEffect)
                 Instantiate(Settings.hitEffect, transform.position, Quaternion.identity);
-            print("die");
+            //print("die");
             Message<ReturnToPool<ProjectileBehaviour>>.Raise(this); 
         }
 
