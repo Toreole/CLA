@@ -1,5 +1,17 @@
 ----- TODO -----
 
+> EXPLOSION!
+	> power up basically
+
+> Power Up System
+	> think about how to spawn them
+	> think about different effects
+
+> UI!!!!
+	> Player health, score, level / stage
+	> current powerup(s)
+	> thing of more
+
 > basic player controller 
 	> shoot towards mouse position
 		> for some reason movemen isnt working properly, it moves without input, against input
