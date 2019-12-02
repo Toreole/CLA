@@ -41,6 +41,7 @@ namespace LATwo
             }
             body.velocity = Settings.speed * transform.up;
             StartCoroutine(EndLifeTime());
+            gameObject.AddComponent<PolygonCollider2D>();
         }
 
         private void FixedUpdate()
@@ -51,7 +52,7 @@ namespace LATwo
             float angle = Vector2.SignedAngle(transform.up, (PlayerController.Position - body.position).normalized);
             //the angle betwee the movement and shit.
             body.rotation += (angle > 0? 1 : -1) * Mathf.Clamp(Settings.turnSpeed * Time.deltaTime, 0f, Mathf.Abs(angle));
-            print(angle);
+            //print(angle);
             body.velocity = Settings.speed * transform.up; //update velocity
         }
 
@@ -67,6 +68,7 @@ namespace LATwo
         private void OnDisable()
         {
             StopAllCoroutines();
+            Destroy(GetComponent<PolygonCollider2D>());
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

@@ -12,7 +12,7 @@ namespace LATwo
             verticalInput = "Vertical",
             fire = "LeftClick";
         [SerializeField]
-        protected float maxHealth = 100f, positiveSpeed = 5f, negativeSpeed = 3f;
+        protected float maxHealth = 100f, speed = 5f;
         [SerializeField]
         protected Projectile projectile;
         [SerializeField]
@@ -38,8 +38,7 @@ namespace LATwo
         private void FixedUpdate()
         {
             //target movement for this frame.
-            var dot = Vector2.Dot(mouseDir, movementInput);
-            movementInput *= (dot >= 0 ? positiveSpeed : negativeSpeed);
+            movementInput *= speed;
             body.velocity = movementInput;
 
             //update position at the end of this fixedupdate lol

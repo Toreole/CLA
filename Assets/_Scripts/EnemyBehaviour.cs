@@ -84,7 +84,7 @@ namespace LATwo
                 else
                 {
                     inStrafeDistance = true;
-                    strafeAngle = Vector2.SignedAngle(Vector2.right, direction);
+                    strafeAngle = Vector2.SignedAngle(Vector2.right, -direction);
                     localStrafeDistance = dist;
                 }
             }
@@ -95,16 +95,19 @@ namespace LATwo
             Vector2 offset = Quaternion.AngleAxis(strafeAngle, Vector3.forward) * Vector2.right;
             offset *= localStrafeDistance;
             body.MovePosition(PlayerController.Position + offset);
+            transform.up = direction;
         }
 
         private void OnEnable()
         {
             lastShotTime = Time.time;
+            gameObject.AddComponent<PolygonCollider2D>();
         }
 
         private void OnDisable()
         {
             inStrafeDistance = false;
+            Destroy(GetComponent<PolygonCollider2D>()); //weird fix
         }
         
         private void OnCollisionEnter2D(Collision2D collision)
