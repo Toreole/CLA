@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LATwo
 {
-    public class Pool<T> : MonoBehaviour where T : MonoBehaviour
+    public class Pool<T> : MonoBehaviour where T : Component
     {
         public int amountOfObjects;
         public GameObject prefab;
@@ -54,7 +54,7 @@ namespace LATwo
         }
     }
 
-    public struct ReturnToPool<T> where T : MonoBehaviour
+    public struct ReturnToPool<T> where T : Component
     {
         public T value;
 

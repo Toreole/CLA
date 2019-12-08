@@ -30,6 +30,15 @@ namespace LATwo
         protected override void Die()
         {
             Message<ReturnToPool<EnemyBehaviour>>.Raise(this);
+            //this used to be ondisable, but Die works just as fine
+            inStrafeDistance = false;
+            Destroy(GetComponent<PolygonCollider2D>()); //weird fix
+            //yeet
+            var system = DeathParticlePool.GetPoolObject();
+            system.transform.position = transform.position + new Vector3(0, 0, -1.5f); //position needs to be a little offset for it to render correctly.
+            var main = system.Main;
+            main.startColor = settings.tint;
+            system.gameObject.SetActive(true);
         }
 
         private void FixedUpdate()
@@ -102,12 +111,6 @@ namespace LATwo
         {
             lastShotTime = Time.time;
             gameObject.AddComponent<PolygonCollider2D>();
-        }
-
-        private void OnDisable()
-        {
-            inStrafeDistance = false;
-            Destroy(GetComponent<PolygonCollider2D>()); //weird fix
         }
         
         private void OnCollisionEnter2D(Collision2D collision)
