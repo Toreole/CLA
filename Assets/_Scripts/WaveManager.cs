@@ -8,6 +8,9 @@ namespace LATwo
     {
         public Wave[] waves;
 
+        [SerializeField]
+        protected LayerMask wallLayer;
+
         protected int totalEnemies;
 
         private IEnumerator Start()
@@ -21,13 +24,26 @@ namespace LATwo
                 {
                     var enemy = EnemyPool.GetPoolObject();
                     enemy.Settings = wave.enemyType;
-                    Vector2 direction = Random.insideUnitCircle.normalized;
-                    Vector2 offset = Mathf.Lerp(wave.minDistance, wave.maxDistance, Random.value) * direction;
-                    enemy.transform.position = PlayerController.Position + offset;
+                    var pos = GetRandomPosition(wave);
+                    while (!PositionIsValid(pos))
+                        pos = GetRandomPosition(wave);
+                    enemy.transform.position = GetRandomPosition(wave);
                     enemy.gameObject.SetActive(true);
+
                 }
                 yield return new WaitForSeconds(wave.time);
             }
+        }
+
+        Vector2 GetRandomPosition(Wave wave)
+        {
+            Vector2 direction = Random.insideUnitCircle.normalized;
+            Vector2 offset = Mathf.Lerp(wave.minDistance, wave.maxDistance, Random.value) * direction;
+            return direction * offset;
+        }
+        bool PositionIsValid(Vector2 pos)
+        {
+            return !Physics2D.OverlapPoint(pos, wallLayer);
         }
 
         //this is what spawns the waves and detects whether its been completed yet.

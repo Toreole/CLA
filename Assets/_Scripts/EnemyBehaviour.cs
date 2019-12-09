@@ -8,7 +8,7 @@ namespace LATwo
     {
         //i like properties
         public Enemy Settings {
-            private get { return settings; }
+            get { return settings; }
             set {
                 settings = value;
                 currentHealth = settings.health;

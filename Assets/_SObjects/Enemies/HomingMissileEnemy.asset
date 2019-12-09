@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: a920ea26393992b438f04596760d11f0, type: 3}
   tint: {r: 0.44108972, g: 0.9150943, b: 0.17697577, a: 1}
-  pointValue: 10
+  pointValue: 12
   speed: 1
-  health: 5
-  attackRate: 1
-  attackRange: 20
+  health: 1
+  attackRate: 2
+  attackRange: 14
   movePattern: 0
   preferredStrafeDistance: 8
   strafeTolerance: 0.5

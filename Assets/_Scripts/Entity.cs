@@ -13,7 +13,7 @@ namespace LATwo
 
         protected float currentHealth;
 
-        public void Damage(float amount)
+        public virtual void Damage(float amount)
         {
             currentHealth -= amount;
             if(currentHealth <= 0)

@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 41501e7a69e7aa64d951c8ccafb66c75, type: 3}
   tint: {r: 0.9245283, g: 0.16135636, b: 0.16135636, a: 1}
-  pointValue: 4
+  pointValue: 15
   speed: 1
-  health: 5
+  health: 1
   attackRate: 1
   attackRange: 20
   movePattern: 1
-  preferredStrafeDistance: 10
+  preferredStrafeDistance: 8
   strafeTolerance: 0.2
-  strafeSpeed: 40
-  projectile: {fileID: 11400000, guid: 0ef48a1456393b741b0730a9b97db4f8, type: 2}
+  strafeSpeed: 20
+  projectile: {fileID: 11400000, guid: d2f810a3b5ee8564e988976497462421, type: 2}

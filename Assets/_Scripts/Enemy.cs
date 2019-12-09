@@ -10,7 +10,7 @@ namespace LATwo
     {
         public Sprite sprite;
         public Color tint;
-        public float pointValue;
+        public int pointValue;
         public float speed;
         public float health;
         public float attackRate;

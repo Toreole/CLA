@@ -64,5 +64,22 @@ namespace LATwo
                 lastShotTime = Time.time;
             }
         }
+
+        public override void Damage(float amount)
+        {
+            base.Damage(amount);
+            var dmg = new PlayerDamaged
+            {
+                newHealth = currentHealth,
+                damage = amount
+            };
+            Message<PlayerDamaged>.Raise(dmg);
+        }
+    }
+
+    public struct PlayerDamaged
+    {
+        public float newHealth;
+        public float damage;
     }
 }
