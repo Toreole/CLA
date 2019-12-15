@@ -31,12 +31,13 @@
 
 
 ---- List of Message i use ----
-> Return To Pool (3):
+> Return To Pool (4):
 	> DeathParticle
 	> Enemy
 	> Projectile
+	> Powerup
 > Player Damaged (1)
-> 
+> Player pickup powerup (1)
 
 
 --- archived ---

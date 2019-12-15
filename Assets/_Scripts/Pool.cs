@@ -25,8 +25,8 @@ namespace LATwo
             }
         }
 
-        private void OnEnable() { Message<ReturnToPool<T>>.Add(ReturnObjectToPool); _instance = this; }
-        private void OnDisable(){ Message<ReturnToPool<T>>.Remove(ReturnObjectToPool); _instance = null; }
+        protected virtual void OnEnable() { Message<ReturnToPool<T>>.Add(ReturnObjectToPool); _instance = this; }
+        protected virtual void OnDisable(){ Message<ReturnToPool<T>>.Remove(ReturnObjectToPool); _instance = null; }
 
         public T M_GetPoolObject()
         {

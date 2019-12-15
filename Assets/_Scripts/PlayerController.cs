@@ -8,9 +8,10 @@ namespace LATwo
         public static Vector2 Position { get; private set; } //hacky but necessary
 
         [SerializeField] //primary input
-        protected string horizontalInput = "Horizontal", 
+        protected string horizontalInput = "Horizontal",
             verticalInput = "Vertical",
-            fire = "LeftClick";
+            fire = "LeftClick",
+            secondaryFire = "RightClick";
         [SerializeField]
         protected float maxHealth = 100f, speed = 5f;
         [SerializeField]
@@ -21,7 +22,10 @@ namespace LATwo
         protected Camera cam;
 
         protected Vector2 mouseDir, movementInput;
-        protected float lastShotTime; 
+        protected float lastShotTime, lastSecondaryShot;
+        //secondary stuff is given by powerups.
+        protected Projectile secondaryProjectile;
+        protected int secondaryAmmo;
         
         //TODO!: think about power-ups
         
@@ -30,8 +34,45 @@ namespace LATwo
             currentHealth = maxHealth;
         }
 
+        private void OnEnable()
+        {
+            Message<PickupPowerup>.Add(ApplyPowerup);
+        }
+
+        private void OnDisable()
+        {
+            Message<PickupPowerup>.Remove(ApplyPowerup);
+        }
+
+        void ApplyPowerup(PickupPowerup powerup)
+        {
+            var p = powerup.value;
+            switch(p.type)
+            {
+                case PowerupType.Health:
+                    currentHealth = Mathf.Clamp(currentHealth + p.effectStrength, 0f, maxHealth);
+                    Message<PlayerDamaged>.Raise(new PlayerDamaged() { newHealth = currentHealth, damage = -currentHealth });
+                    break;
+                case PowerupType.Projectile:
+                    secondaryProjectile = p.projectile;
+                    secondaryAmmo = (int)p.effectStrength;
+                    break;
+                case PowerupType.Speed:
+                    speed += p.effectStrength;
+                    StartCoroutine(RemoveSpeed(p.effectStrength, p.effectLength));
+                    break;
+            }
+        }
+
+        IEnumerator RemoveSpeed(float strength, float length)
+        {
+            yield return new WaitForSeconds(length);
+            speed -= strength;
+        }
+
         protected override void Die()
         {
+            //TODO: THIS.
             //FAILED THE GAME REEEEEEEEEEEEEEEEEEEEEEEEEEEEE
         }
 
@@ -62,6 +103,15 @@ namespace LATwo
             {
                 ProjectilePool.GetPoolObject().Init(projectile, gameObject);
                 lastShotTime = Time.time;
+            }
+            if (secondaryAmmo > 0)
+            {
+                if (Input.GetButton(secondaryFire) && Time.time - lastSecondaryShot >= attackRate)
+                {
+                    ProjectilePool.GetPoolObject().Init(secondaryProjectile, gameObject);
+                    lastSecondaryShot = Time.time;
+                    secondaryAmmo--;
+                }
             }
         }
 
