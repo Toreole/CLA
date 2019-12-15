@@ -38,6 +38,7 @@
 	> Powerup
 > Player Damaged (1)
 > Player pickup powerup (1)
+> VerifyScore (1)
 
 
 --- archived ---

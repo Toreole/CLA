@@ -33,13 +33,6 @@ namespace LATwo
         Projectile, Health, Speed
     }
 
-    public struct PickupPowerup
-    {
-        public Powerup value;
-        public static implicit operator Powerup(PickupPowerup obj) { return obj.value; }
-        public static implicit operator PickupPowerup(Powerup obj) { return new PickupPowerup { value = obj }; }
-    }
-
 #if UNITY_EDITOR
     [CustomEditor(typeof(Powerup))]
     public class PowerupEditor : Editor

@@ -20,14 +20,19 @@ namespace LATwo
         protected float attackRate = 0.4f;
         [SerializeField]
         protected Camera cam;
-
+        //SCORE
+        [SerializeField]
+        protected TMPro.TextMeshProUGUI scoreDisplay;
+        [SerializeField]
+        protected int scoreLength = 6;
+        
         protected Vector2 mouseDir, movementInput;
         protected float lastShotTime, lastSecondaryShot;
         //secondary stuff is given by powerups.
         protected Projectile secondaryProjectile;
         protected int secondaryAmmo;
         
-        //TODO!: think about power-ups
+        int currentScore;
         
         protected void Start()
         {
@@ -36,11 +41,14 @@ namespace LATwo
 
         private void OnEnable()
         {
+            Message<ReturnToPool<EnemyBehaviour>>.Add(UpdateScore);
+            scoreDisplay.text = GetScoreText();
             Message<PickupPowerup>.Add(ApplyPowerup);
         }
 
         private void OnDisable()
         {
+            Message<ReturnToPool<EnemyBehaviour>>.Remove(UpdateScore);
             Message<PickupPowerup>.Remove(ApplyPowerup);
         }
 
@@ -50,8 +58,11 @@ namespace LATwo
             switch(p.type)
             {
                 case PowerupType.Health:
+                    //print("heal:" + p.effectStrength.ToString("00.00")); 
+                    //print(currentHealth);
                     currentHealth = Mathf.Clamp(currentHealth + p.effectStrength, 0f, maxHealth);
-                    Message<PlayerDamaged>.Raise(new PlayerDamaged() { newHealth = currentHealth, damage = -currentHealth });
+                    //print(currentHealth);
+                    Message<PlayerDamaged>.Raise(new PlayerDamaged() { newHealth = currentHealth, damage = 0f });
                     break;
                 case PowerupType.Projectile:
                     secondaryProjectile = p.projectile;
@@ -73,7 +84,7 @@ namespace LATwo
         protected override void Die()
         {
             //TODO: THIS.
-            //FAILED THE GAME REEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            Message<PlayerDied>.Raise(default);
         }
 
         private void FixedUpdate()
@@ -125,11 +136,22 @@ namespace LATwo
             };
             Message<PlayerDamaged>.Raise(dmg);
         }
-    }
 
-    public struct PlayerDamaged
-    {
-        public float newHealth;
-        public float damage;
+        //EDIT: Removed ScoreManager and added score to the player.
+        //since the return to pool message is called on enemies when they die, this works
+        void UpdateScore(ReturnToPool<EnemyBehaviour> enemy)
+        {
+            currentScore += enemy.value.Settings.pointValue;
+            //update score, then update UI
+            scoreDisplay.text = GetScoreText();
+        }
+
+        string GetScoreText()
+        {
+            string score = currentScore.ToString();
+            for (int l = score.Length; l < scoreLength; l++)
+                score = "0" + score;
+            return score;
+        }
     }
 }

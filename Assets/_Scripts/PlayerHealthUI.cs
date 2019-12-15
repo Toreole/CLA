@@ -21,6 +21,7 @@ namespace LATwo
         void UpdateSlider(PlayerDamaged dmg)
         {
             healthSlider.value = dmg.newHealth;
+            //print("update slider:" + dmg.newHealth);
         }
     }
 }

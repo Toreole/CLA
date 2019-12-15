@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 189461102143504282}
   - component: {fileID: 189461102143504283}
   - component: {fileID: 189461102143504281}
+  - component: {fileID: 1110439584}
+  - component: {fileID: 1110439585}
   m_Layer: 0
   m_Name: _POOLS
   m_TagString: Untagged
@@ -44,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b10d48f463f7234a9483fa4f406f7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfObjects: 100
+  amountOfObjects: 150
   prefab: {fileID: 4361198017694028705, guid: 363e3fed139ac4940881522615eb2626, type: 3}
 --- !u!114 &189461102143504281
 MonoBehaviour:
@@ -58,5 +60,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898c5fd2132c6a546baf7b54209f34ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfObjects: 30
+  amountOfObjects: 50
   prefab: {fileID: 6156274404012684702, guid: 067e5653b06a718429ebc28622e56f2c, type: 3}
+--- !u!114 &1110439584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189461102143504260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bde993554e4ffa4c85a9d2237544dec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfObjects: 20
+  prefab: {fileID: 9130793848359956285, guid: a0f04c4503bb980498d9de8cb4fd25a7, type: 3}
+--- !u!114 &1110439585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189461102143504260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f28d2652ee04a542b44c264e447c7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfObjects: 10
+  prefab: {fileID: 7143218801011822184, guid: 7a68cdecaa59ccf4c9d3066460394f63, type: 3}
+  powerups:
+  - {fileID: 11400000, guid: 73e224d44bbda244387a77cd3f0e1e73, type: 2}
+  - {fileID: 11400000, guid: 2c659e46c7b1df5419c43ff67a96dae9, type: 2}
+  baseSpawnChance: 0.1
+  enemyCountToAlwaysSpawn: 20

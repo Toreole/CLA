@@ -26,7 +26,7 @@ namespace LATwo
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            print("ree");
+            //print("ree");
             if (collision.CompareTag(playerTag))
             {
                 StopAllCoroutines();

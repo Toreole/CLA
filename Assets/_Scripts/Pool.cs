@@ -53,14 +53,4 @@ namespace LATwo
             pooledObjects.Enqueue(obj); 
         }
     }
-
-    public struct ReturnToPool<T> where T : Component
-    {
-        public T value;
-
-        public Transform transform => value.transform;
-
-        public static implicit operator ReturnToPool<T>(T obj) { return new ReturnToPool<T>() { value = obj }; }
-        public static implicit operator T(ReturnToPool<T> obj) { return obj.value; }
-    }
 }
