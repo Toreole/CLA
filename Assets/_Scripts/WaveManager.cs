@@ -12,8 +12,9 @@ namespace LATwo
         protected LayerMask wallLayer;
 
         protected int totalEnemies;
+        protected int deadEnemies = 0;
 
-        private IEnumerator Start()
+        private IEnumerator SpawnWaves()
         {
             foreach (var x in waves)
                 totalEnemies += x.amount;
@@ -32,6 +33,40 @@ namespace LATwo
 
                 }
                 yield return new WaitForSeconds(wave.time);
+            }
+        }
+
+        private void OnEnable()
+        {
+            Message<ReturnToPool<EnemyBehaviour>>.Add(EnemyDied);
+            Message<GameStarted>.Add(StartGame);
+            Message<GameOver>.Add(EndGame);
+        }
+
+        private void OnDisable()
+        {
+            Message<ReturnToPool<EnemyBehaviour>>.Remove(EnemyDied);
+            Message<GameStarted>.Remove(StartGame);
+            Message<GameOver>.Remove(EndGame);
+        }
+
+        private void StartGame(GameStarted gs)
+        {
+            StartCoroutine(SpawnWaves());
+        }
+
+        void EndGame(GameOver go)
+        {
+            //stop the spawning.
+            StopAllCoroutines();
+        }
+
+        void EnemyDied(ReturnToPool<EnemyBehaviour> enemy)
+        {
+            deadEnemies++;
+            if(deadEnemies >= totalEnemies)
+            {
+                //This should go to the next level, OR show the winning end-screen.
             }
         }
 

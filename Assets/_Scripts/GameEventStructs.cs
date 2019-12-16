@@ -37,7 +37,13 @@ namespace LATwo
         public static implicit operator PickupPowerup(Powerup obj) { return new PickupPowerup { value = obj }; }
     }
 
-    public struct PlayerDied
+    public struct GameOver
+    {
+        public bool playerDied;
+        public int finalScore;
+    }
+
+    public struct GameStarted
     {
 
     }

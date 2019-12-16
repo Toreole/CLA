@@ -27,6 +27,8 @@ namespace LATwo
         Vector2 direction;
         float dist;
 
+        private bool isFrozen = false;
+
         protected override void Die()
         {
             Message<ReturnToPool<EnemyBehaviour>>.Raise(this);
@@ -43,6 +45,9 @@ namespace LATwo
 
         private void FixedUpdate()
         {
+            if (isFrozen)
+                return;
+
             //Movement and shooting.
             direction = (PlayerController.Position - body.position).normalized;
 
@@ -111,8 +116,19 @@ namespace LATwo
         {
             lastShotTime = Time.time;
             gameObject.AddComponent<PolygonCollider2D>();
+            Message<GameOver>.Add(OnGameOver);
         }
-        
+
+        private void OnDisable()
+        {
+            Message<GameOver>.Remove(OnGameOver);   
+        }
+
+        private void OnGameOver(GameOver go)
+        {
+            isFrozen = true;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if(collision.gameObject.CompareTag("Wall"))

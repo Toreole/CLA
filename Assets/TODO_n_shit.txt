@@ -29,6 +29,7 @@
 
 > main menu
 
+> Score of player needs to persist between levels.
 
 ---- List of Message i use ----
 > Return To Pool (4):
@@ -39,6 +40,8 @@
 > Player Damaged (1)
 > Player pickup powerup (1)
 > VerifyScore (1)
+> GameOver (1)
+> Game Started (1)
 
 
 --- archived ---

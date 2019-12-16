@@ -84,21 +84,26 @@ namespace LATwo
         protected override void Die()
         {
             //TODO: THIS.
-            Message<PlayerDied>.Raise(default);
+            body.velocity = Vector2.zero;
+            Message<GameOver>.Raise(new GameOver() { finalScore = currentScore, playerDied = true } );
         }
 
         private void FixedUpdate()
         {
+            if (currentHealth <= 0)
+                return;
             //target movement for this frame.
             movementInput *= speed;
             body.velocity = movementInput;
 
             //update position at the end of this fixedupdate lol
-            Position = body.position;
+            //Position = body.position;
         }
 
         private void Update()
         {
+            if (currentHealth <= 0)
+                return;
             //movement input
             movementInput.x = Input.GetAxis(horizontalInput);
             movementInput.y = Input.GetAxis(verticalInput);
