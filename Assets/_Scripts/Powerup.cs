@@ -40,7 +40,8 @@ namespace LATwo
         public override void OnInspectorGUI()
         {
             Powerup pu = target as Powerup;
-
+            EditorUtility.SetDirty(pu); //im actually fucking stupid for forgetting this
+            //without the object being setDirty, it wont actually save the data.
             //basic shit first.
             pu.lifeTime = EditorGUILayout.FloatField("Life Time", pu.lifeTime);
             pu.sprite = (Sprite)EditorGUILayout.ObjectField("Sprite", pu.sprite, typeof(Sprite), false);
