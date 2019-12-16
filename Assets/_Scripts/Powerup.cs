@@ -30,7 +30,7 @@ namespace LATwo
 
     public enum PowerupType
     {
-        Projectile, Health, Speed
+        Projectile, Health, Speed, Firerate
     }
 
 #if UNITY_EDITOR
@@ -63,6 +63,10 @@ namespace LATwo
                 case PowerupType.Speed:
                     pu.effectLength = EditorGUILayout.FloatField("Speed Time", pu.effectLength);
                     pu.effectStrength = EditorGUILayout.FloatField("Bonus Speed", pu.effectStrength);
+                    break;
+                case PowerupType.Firerate:
+                    pu.effectStrength = EditorGUILayout.Slider("Firerate Boost", pu.effectStrength, 1f, 2.5f);
+                    pu.effectLength = EditorGUILayout.FloatField("Boost Time", pu.effectLength);
                     break;
             }
         }

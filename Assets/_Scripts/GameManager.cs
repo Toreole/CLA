@@ -22,7 +22,7 @@ namespace LATwo
                 instance = this;
                 DontDestroyOnLoad(gameObject);
             }
-            SceneManager.LoadScene(menuScene); //complete this and open the menu.
+            SceneManager.LoadScene(menuScene); //complete this and open the menu. 
         }
 
         public static void StartGame()

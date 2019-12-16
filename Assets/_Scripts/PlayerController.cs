@@ -42,7 +42,7 @@ namespace LATwo
         private void OnEnable()
         {
             Message<ReturnToPool<EnemyBehaviour>>.Add(UpdateScore);
-            scoreDisplay.text = GetScoreText();
+            scoreDisplay.text = CurrentScore.ToScoreString(scoreLength);
             Message<PickupPowerup>.Add(ApplyPowerup);
             Message<GameStarted>.Add(StartGame);
         }
@@ -74,6 +74,11 @@ namespace LATwo
                     speed += p.effectStrength;
                     StartCoroutine(RemoveSpeed(p.effectStrength, p.effectLength));
                     break;
+                case PowerupType.Firerate:
+                    attackRate /= p.effectStrength;
+                    StartCoroutine(RemoveFireBoost(p.effectStrength, p.effectLength));
+                    break; 
+
             }
         }
 
@@ -81,6 +86,11 @@ namespace LATwo
         {
             yield return new WaitForSeconds(length);
             speed -= strength;
+        }
+        IEnumerator RemoveFireBoost(float boost, float time)
+        {
+            yield return new WaitForSeconds(time);
+            attackRate *= boost;
         }
 
         protected override void Die()
@@ -150,17 +160,9 @@ namespace LATwo
         {
             CurrentScore += enemy.value.Settings.pointValue;
             //update score, then update UI
-            scoreDisplay.text = GetScoreText();
+            scoreDisplay.text = CurrentScore.ToScoreString(scoreLength);
         }
-
-        string GetScoreText()
-        {
-            string score = CurrentScore.ToString();
-            for (int l = score.Length; l < scoreLength; l++)
-                score = "0" + score;
-            return score;
-        }
-
+        
         internal static void ResetScore()
             => CurrentScore = 0;
     }
