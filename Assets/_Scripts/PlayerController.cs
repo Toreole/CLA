@@ -32,9 +32,9 @@ namespace LATwo
         protected Projectile secondaryProjectile;
         protected int secondaryAmmo;
         
-        int currentScore;
+        public static int CurrentScore { get; private set; }
         
-        protected void Start()
+        protected void StartGame(GameStarted start)
         {
             currentHealth = maxHealth;
         }
@@ -44,12 +44,14 @@ namespace LATwo
             Message<ReturnToPool<EnemyBehaviour>>.Add(UpdateScore);
             scoreDisplay.text = GetScoreText();
             Message<PickupPowerup>.Add(ApplyPowerup);
+            Message<GameStarted>.Add(StartGame);
         }
 
         private void OnDisable()
         {
             Message<ReturnToPool<EnemyBehaviour>>.Remove(UpdateScore);
             Message<PickupPowerup>.Remove(ApplyPowerup);
+            Message<GameStarted>.Remove(StartGame);
         }
 
         void ApplyPowerup(PickupPowerup powerup)
@@ -85,7 +87,7 @@ namespace LATwo
         {
             //TODO: THIS.
             body.velocity = Vector2.zero;
-            Message<GameOver>.Raise(new GameOver() { finalScore = currentScore, playerDied = true } );
+            Message<GameOver>.Raise(new GameOver() { finalScore = CurrentScore, playerDied = true } );
         }
 
         private void FixedUpdate()
@@ -97,7 +99,7 @@ namespace LATwo
             body.velocity = movementInput;
 
             //update position at the end of this fixedupdate lol
-            //Position = body.position;
+            Position = body.position;
         }
 
         private void Update()
@@ -146,17 +148,20 @@ namespace LATwo
         //since the return to pool message is called on enemies when they die, this works
         void UpdateScore(ReturnToPool<EnemyBehaviour> enemy)
         {
-            currentScore += enemy.value.Settings.pointValue;
+            CurrentScore += enemy.value.Settings.pointValue;
             //update score, then update UI
             scoreDisplay.text = GetScoreText();
         }
 
         string GetScoreText()
         {
-            string score = currentScore.ToString();
+            string score = CurrentScore.ToString();
             for (int l = score.Length; l < scoreLength; l++)
                 score = "0" + score;
             return score;
         }
+
+        internal static void ResetScore()
+            => CurrentScore = 0;
     }
 }

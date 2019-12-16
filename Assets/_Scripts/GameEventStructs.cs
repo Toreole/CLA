@@ -47,4 +47,9 @@ namespace LATwo
     {
 
     }
+
+    public struct LevelChanged
+    {
+
+    }
 }
