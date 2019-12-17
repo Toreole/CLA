@@ -30,6 +30,9 @@ namespace LATwo
             this.Settings = settings;
             transform.position = context.transform.position;
             gameObject.SetActive(true);
+            //play soundeffect if necessary.
+            if(settings.shootSound)
+                GameManager.PlaySFX(settings.shootSound);
         }
 
         private void OnEnable()

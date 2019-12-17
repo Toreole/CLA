@@ -18,5 +18,6 @@ namespace LATwo
         public float turnSpeed;
         public float lifeTime;
         public GameObject hitEffect;
+        public AudioClip shootSound;
     }
 }

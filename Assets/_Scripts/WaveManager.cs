@@ -74,7 +74,10 @@ namespace LATwo
                     Message<GameOver>.Raise(new GameOver() { finalScore = PlayerController.CurrentScore, playerDied = false });
                 }
                 else
+                {
+                    Message<StageCleared>.Raise(default); //TODO: i guess
                     GameManager.GoToLevel(nextLevel);
+                }
             }
         }
 

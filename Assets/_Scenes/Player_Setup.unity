@@ -505,6 +505,11 @@ PrefabInstance:
       propertyPath: scoreDisplay
       value: 
       objectReference: {fileID: 352218250}
+    - target: {fileID: 6294749525331609797, guid: aeeffd4f868ca5c4c9f6a001796c5bb4,
+        type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 68ae34cc9102df04da5c04329f226915, type: 3}
     - target: {fileID: 1601956773, guid: aeeffd4f868ca5c4c9f6a001796c5bb4, type: 3}
       propertyPath: m_Layer
       value: 11

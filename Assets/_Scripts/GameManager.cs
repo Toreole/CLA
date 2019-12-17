@@ -12,6 +12,10 @@ namespace LATwo
 
         [SerializeField]
         protected string menuScene = "Menu", playerPreloadScene = "Player_Setup", firstLevel = "Level_0";
+        [SerializeField]
+        protected AudioSource sfxAudio, bgm_A, bgm_B;
+        [SerializeField]
+        protected float fadeTime;
 
         void Start()
         {
@@ -46,8 +50,11 @@ namespace LATwo
         public static void GoToLevel(string level)
         {
             SceneManager.UnloadSceneAsync(instance.currentLevel);
-            SceneManager.LoadScene(level);
+            SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive); //fix
             instance.currentLevel = level;
         }
+
+        //yeet
+        public static void PlaySFX(AudioClip clip) => instance.sfxAudio.PlayOneShot(clip);
     }
 }

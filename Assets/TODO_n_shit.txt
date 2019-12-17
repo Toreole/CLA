@@ -6,6 +6,8 @@
 	> input n stuff
 	> send to score list.
 
+>> Music fading between scenes.
+
 > EXPLOSION!
 	> power up basically
 

@@ -52,4 +52,9 @@ namespace LATwo
     {
 
     }
+
+    public struct StageCleared
+    {
+
+    }
 }

@@ -20,6 +20,8 @@ namespace LATwo
         protected float attackRate = 0.4f;
         [SerializeField]
         protected Camera cam;
+        [SerializeField]
+        protected AudioClip hitSound;
         //SCORE
         [SerializeField]
         protected TMPro.TextMeshProUGUI scoreDisplay;
@@ -152,6 +154,7 @@ namespace LATwo
                 damage = amount
             };
             Message<PlayerDamaged>.Raise(dmg);
+            GameManager.PlaySFX(hitSound);
         }
 
         //EDIT: Removed ScoreManager and added score to the player.

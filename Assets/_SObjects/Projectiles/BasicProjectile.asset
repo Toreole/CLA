@@ -20,3 +20,4 @@ MonoBehaviour:
   turnSpeed: 0
   lifeTime: 2
   hitEffect: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: aeb96f8ddc45c7948935c00eb256a4d6, type: 3}
