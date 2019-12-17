@@ -17,6 +17,13 @@ namespace LATwo
         [SerializeField]
         protected float fadeTime;
 
+        protected BGMState bgmState = BGMState.None;
+
+        public enum BGMState
+        {
+            A, B, None
+        }
+
         void Start()
         {
             if (instance)
@@ -49,9 +56,52 @@ namespace LATwo
 
         public static void GoToLevel(string level)
         {
+            if (!instance)
+                return;
             SceneManager.UnloadSceneAsync(instance.currentLevel);
             SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive); //fix
             instance.currentLevel = level;
+        }
+
+        public static void TransitionBGM(AudioClip track) { if (instance) instance.M_TransitionBGM(track); } 
+
+        private void M_TransitionBGM(AudioClip track)
+        {
+            if(bgmState == BGMState.None)
+            {
+                bgm_A.clip = track;
+                bgm_A.Play();
+                bgmState = BGMState.A;
+                return;
+            }
+            else
+            {
+                //toggle
+                var isA = bgmState == BGMState.A;
+                bgmState = (isA) ? BGMState.B : BGMState.A;
+                var audioA = (isA) ? bgm_A : bgm_B;
+                var audioB = (isA) ? bgm_B : bgm_A;
+                StartCoroutine(CrossFade(audioA, audioB));
+                //assign the clip.
+                audioB.clip = track;
+                audioB.volume = 0f; //mute audio
+                audioB.Play();
+            }
+        }
+
+        IEnumerator CrossFade(AudioSource a, AudioSource b)
+        {
+            for(float t = 0f; t < fadeTime; t+= Time.deltaTime)
+            {
+                float normT = t / fadeTime;
+                a.volume = 1f - normT;
+                b.volume = normT;
+                yield return null;
+            }
+
+            a.volume = 0f;
+            b.volume = 1f;
+            a.Stop();
         }
 
         //yeet

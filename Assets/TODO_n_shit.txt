@@ -6,7 +6,7 @@
 	> input n stuff
 	> send to score list.
 
->> Music fading between scenes.
+>>> better scene transition, no instant cut.
 
 > EXPLOSION!
 	> power up basically
@@ -62,6 +62,7 @@
 
 > pool enemies and bullets for performance i guess
 
+>> Music fading between scenes. (DONE)
 
 > Power Up System
 	> think about how to spawn them
