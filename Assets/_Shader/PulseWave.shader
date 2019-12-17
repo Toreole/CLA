@@ -6,7 +6,7 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-		_ImpactTime ("Impact", float) = 0
+		//_ImpactTime ("Impact", float) = 0
 		_WaveSpeed ("Wave Speed", float ) = 100
 		_WaveWidth ("Wave width", float) = 10
 		_OffsetStrength ("Offset", float) = 0.05

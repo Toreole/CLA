@@ -6,6 +6,6 @@ namespace LATwo
 {
     public class GameEndScreen : MonoBehaviour
     {
-        //bruh
+        //TODO: all of this.
     }
 }

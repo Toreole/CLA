@@ -43,6 +43,13 @@ namespace LATwo
             system.gameObject.SetActive(true);
         }
 
+#if UNITY_EDITOR
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+                Die();
+        }
+#endif
         private void FixedUpdate()
         {
             if (isFrozen)

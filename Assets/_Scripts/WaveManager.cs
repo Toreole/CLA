@@ -12,12 +12,19 @@ namespace LATwo
         protected LayerMask wallLayer;
         [SerializeField]
         protected string nextLevel;
+        [SerializeField]
+        protected bool waitOnGameStartCountdown = false;
+        [SerializeField]
+        protected float startOffset = 1f;
 
         protected int totalEnemies;
         protected int deadEnemies = 0;
 
         private IEnumerator SpawnWaves()
         {
+            yield return new WaitForSecondsRealtime(0.5f);
+            Message<StageStarted>.Raise(default);
+            yield return new WaitForSeconds(startOffset);
             foreach (var x in waves)
                 totalEnemies += x.amount;
 
@@ -41,14 +48,18 @@ namespace LATwo
         private void OnEnable()
         {
             Message<ReturnToPool<EnemyBehaviour>>.Add(EnemyDied);
-            Message<GameStarted>.Add(StartGame);
+            if(waitOnGameStartCountdown)
+                Message<GameStarted>.Add(StartGame);
+            else
+                StartCoroutine(SpawnWaves());
             Message<GameOver>.Add(EndGame);
         }
 
         private void OnDisable()
         {
             Message<ReturnToPool<EnemyBehaviour>>.Remove(EnemyDied);
-            Message<GameStarted>.Remove(StartGame);
+            if (waitOnGameStartCountdown)
+                Message<GameStarted>.Remove(StartGame);
             Message<GameOver>.Remove(EndGame);
         }
 
@@ -75,10 +86,16 @@ namespace LATwo
                 }
                 else
                 {
-                    Message<StageCleared>.Raise(default); //TODO: i guess
-                    GameManager.GoToLevel(nextLevel);
+                    Message<StageCleared>.Raise(new StageCleared() { bufferTime = 3f }); //TODO: i guess
+                    StartCoroutine(GoToNextLevel());
                 }
             }
+        }
+
+        IEnumerator GoToNextLevel()
+        {
+            yield return new WaitForSeconds(3f);
+            GameManager.GoToLevel(nextLevel);
         }
 
         Vector2 GetRandomPosition(Wave wave)

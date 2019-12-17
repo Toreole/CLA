@@ -17,7 +17,7 @@ namespace LATwo
         [SerializeField]
         protected Projectile projectile;
         [SerializeField]
-        protected float attackRate = 0.4f;
+        protected float attackRate = 0.4f, invulTime = 0.2f;
         [SerializeField]
         protected Camera cam;
         [SerializeField]
@@ -33,20 +33,27 @@ namespace LATwo
         //secondary stuff is given by powerups.
         protected Projectile secondaryProjectile;
         protected int secondaryAmmo;
-        
+
+        //yes i need this
+        protected bool canMove = false;
+        protected bool vulnerable = true;
+
         public static int CurrentScore { get; private set; }
         
         protected void StartGame(GameStarted start)
         {
+            canMove = true;
             currentHealth = maxHealth;
         }
 
         private void OnEnable()
         {
-            Message<ReturnToPool<EnemyBehaviour>>.Add(UpdateScore);
             scoreDisplay.text = CurrentScore.ToScoreString(scoreLength);
+            Message<ReturnToPool<EnemyBehaviour>>.Add(UpdateScore);
             Message<PickupPowerup>.Add(ApplyPowerup);
             Message<GameStarted>.Add(StartGame);
+            Message<StageCleared>.Add(OnClearStage);
+            Message<StageStarted>.Add(OnStageStart);
         }
 
         private void OnDisable()
@@ -54,6 +61,23 @@ namespace LATwo
             Message<ReturnToPool<EnemyBehaviour>>.Remove(UpdateScore);
             Message<PickupPowerup>.Remove(ApplyPowerup);
             Message<GameStarted>.Remove(StartGame);
+            Message<StageCleared>.Remove(OnClearStage);
+            Message<StageStarted>.Remove(OnStageStart);
+        }
+
+        void OnStageStart(StageStarted st)
+        {
+            canMove = true;
+            vulnerable = true;
+            //body.isKinematic = false;
+        }
+
+        void OnClearStage(StageCleared st)
+        {
+            canMove = false;
+            vulnerable = false;
+            body.velocity = Vector2.zero;
+            //body.isKinematic = true;
         }
 
         void ApplyPowerup(PickupPowerup powerup)
@@ -104,7 +128,7 @@ namespace LATwo
 
         private void FixedUpdate()
         {
-            if (currentHealth <= 0)
+            if (currentHealth <= 0 || !canMove)
                 return;
             //target movement for this frame.
             movementInput *= speed;
@@ -116,11 +140,11 @@ namespace LATwo
 
         private void Update()
         {
-            if (currentHealth <= 0)
+            if (currentHealth <= 0 || !canMove)
                 return;
             //movement input
-            movementInput.x = Input.GetAxis(horizontalInput);
-            movementInput.y = Input.GetAxis(verticalInput);
+            movementInput.x = Input.GetAxisRaw(horizontalInput);
+            movementInput.y = Input.GetAxisRaw(verticalInput);
             movementInput.Normalize();
 
             //mouse position -> direction
@@ -147,6 +171,8 @@ namespace LATwo
 
         public override void Damage(float amount)
         {
+            if (!vulnerable)
+                return;
             base.Damage(amount);
             var dmg = new PlayerDamaged
             {
@@ -155,6 +181,13 @@ namespace LATwo
             };
             Message<PlayerDamaged>.Raise(dmg);
             GameManager.PlaySFX(hitSound);
+            StartCoroutine(DoInvulnerab());
+            IEnumerator DoInvulnerab()
+            {
+                vulnerable = false;
+                yield return new WaitForSeconds(invulTime);
+                vulnerable = true;
+            }
         }
 
         //EDIT: Removed ScoreManager and added score to the player.

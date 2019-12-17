@@ -6,35 +6,12 @@
 	> input n stuff
 	> send to score list.
 
->>> better scene transition, no instant cut.
-
 > EXPLOSION!
 	> power up basically
 
 > UI!!!!
-	> Player health, score, level / stage
 	> small text onCollectPowerup (+attackrate/etc.) 
 		> also on lose powerup? maybe.
-	> think of more
-
-> basic player controller 
-	> fix collision with falls
-	> shoot towards mouse position
-		> for some reason movemen isnt working properly, it moves without input, against input
-
-		> same shit, but for enemies.
-			> also: improve spawn code for enemies, its kinda ugly lmao
-
-> level system 
-> wave system for enemies
-		> spawn delay for enemies, maybe some nice effect to show that things are spawning...
-	> detect when all waves are done
-
-> highscore - name & score (local)
-
-> main menu
-
-> Score of player needs to persist between levels.
 
 ---- List of Message i use ----
 > Return To Pool (4):
@@ -47,16 +24,17 @@
 > VerifyScore (1)
 > GameOver (1)
 > Game Started (1)
+> Stage Clear (1)
+> Stage Start (1)
 
 
 --- archived ---
 > secondary camera with rendertexture for some cool shit i suppose
 	> only if the player isnt in range for a boss or some event
 
-
-
 ----- COMPLETED -----
 
+> Give player short invulnerability after being hit.
 > Enemy/Bullet Prefab
 > SOs for enemy/bullet settings n stuff
 
@@ -67,3 +45,22 @@
 > Power Up System
 	> think about how to spawn them
 	> think about different effects
+
+> highscore - name & score (local)
+
+> basic player controller 
+	> fix collision with falls
+	> shoot towards mouse position
+		> for some reason movemen isnt working properly, it moves without input, against input
+	> UI Player health, score, level / stage
+		
+> level system 
+> wave system for enemies
+		> spawn delay for enemies, maybe some nice effect to show that things are spawning...
+	> detect when all waves are done
+
+> main menu
+
+> Score of player needs to persist between levels.
+
+>>> better scene transition, no instant cut.

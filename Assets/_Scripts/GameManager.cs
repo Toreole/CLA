@@ -59,7 +59,7 @@ namespace LATwo
             if (!instance)
                 return;
             SceneManager.UnloadSceneAsync(instance.currentLevel);
-            SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive); //fix
+            SceneManager.LoadScene(level, LoadSceneMode.Additive); //fix
             instance.currentLevel = level;
         }
 

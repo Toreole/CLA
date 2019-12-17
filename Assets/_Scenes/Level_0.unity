@@ -492,6 +492,16 @@ PrefabInstance:
       propertyPath: waves.Array.data[3].maxDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waitOnGameStartCountdown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: startOffset
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a7e94ebfa433d14cae9fb3073362a58, type: 3}
 --- !u!1 &1214128500

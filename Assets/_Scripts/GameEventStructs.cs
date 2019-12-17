@@ -55,6 +55,11 @@ namespace LATwo
 
     public struct StageCleared
     {
+        public float bufferTime;
+    }
+
+    public struct StageStarted
+    {
 
     }
 }
