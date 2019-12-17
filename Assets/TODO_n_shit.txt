@@ -1,16 +1,19 @@
 ----- TODO -----
 
+>>> Game End Screen -> show on GameOver event
+	> show GAME OVER / YOU WON depending on the thingy
+	> click to continue
+	> input n stuff
+	> send to score list.
+
 > EXPLOSION!
 	> power up basically
 
-> Power Up System
-	> think about how to spawn them
-	> think about different effects
-
 > UI!!!!
 	> Player health, score, level / stage
-	> current powerup(s)
-	> thing of more
+	> small text onCollectPowerup (+attackrate/etc.) 
+		> also on lose powerup? maybe.
+	> think of more
 
 > basic player controller 
 	> fix collision with falls
@@ -57,3 +60,7 @@
 
 > pool enemies and bullets for performance i guess
 
+
+> Power Up System
+	> think about how to spawn them
+	> think about different effects

@@ -10,6 +10,8 @@ namespace LATwo
 
         [SerializeField]
         protected LayerMask wallLayer;
+        [SerializeField]
+        protected string nextLevel;
 
         protected int totalEnemies;
         protected int deadEnemies = 0;
@@ -67,6 +69,12 @@ namespace LATwo
             if(deadEnemies >= totalEnemies)
             {
                 //This should go to the next level, OR show the winning end-screen.
+                if (string.IsNullOrEmpty(nextLevel))
+                {
+                    Message<GameOver>.Raise(new GameOver() { finalScore = PlayerController.CurrentScore, playerDied = false });
+                }
+                else
+                    GameManager.GoToLevel(nextLevel);
             }
         }
 

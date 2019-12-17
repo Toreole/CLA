@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfbc773501a7e8d4cb9de51e30372c1d, type: 3}
+  m_Name: StationaryEnemy
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 41501e7a69e7aa64d951c8ccafb66c75, type: 3}
+  tint: {r: 0.31877524, g: 0.3490566, b: 0, a: 1}
+  pointValue: 2
+  speed: 0
+  health: 1
+  attackRate: 1
+  attackRange: 10
+  movePattern: 2
+  preferredStrafeDistance: 0
+  strafeTolerance: 0.5
+  strafeSpeed: 0
+  projectile: {fileID: 11400000, guid: d2f810a3b5ee8564e988976497462421, type: 2}
