@@ -104,6 +104,12 @@ namespace LATwo
             a.Stop();
         }
 
+        public static void OpenMenu()
+        {
+            instance.currentLevel = "";
+            SceneManager.LoadScene(instance.menuScene);
+        }
+
         //yeet
         public static void PlaySFX(AudioClip clip) => instance.sfxAudio.PlayOneShot(clip);
     }

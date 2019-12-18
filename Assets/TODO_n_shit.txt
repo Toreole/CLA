@@ -6,6 +6,9 @@
 	> input n stuff
 	> send to score list.
 
+>> fix stationary enemies
+>> fix enemy sound (they all fire at the exact same time and it bunches up)
+
 > EXPLOSION!
 	> power up basically
 
@@ -13,7 +16,7 @@
 	> small text onCollectPowerup (+attackrate/etc.) 
 		> also on lose powerup? maybe.
 
----- List of Message i use ----
+---- List of Message i use ---- > i need more?!?!?! bruhhhh
 > Return To Pool (4):
 	> DeathParticle
 	> Enemy
@@ -64,3 +67,11 @@
 > Score of player needs to persist between levels.
 
 >>> better scene transition, no instant cut.
+
+
+>>endscreen fix
+	> should always be in front
+	> input field fix (bright white rn)
+		> text too dark to read
+>> endscreen music
+		> convert to capital only

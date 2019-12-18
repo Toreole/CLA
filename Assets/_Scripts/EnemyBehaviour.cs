@@ -62,6 +62,11 @@ namespace LATwo
                 Strafe();
             else if (Settings.movePattern == MovementType.FollowPlayer)
                 FollowPlayer();
+            else if (Settings.movePattern == MovementType.Stationary)
+            {
+                transform.up = direction;
+                body.velocity = Vector2.zero;
+            }
 
             Shoot();
         }

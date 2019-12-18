@@ -124,6 +124,7 @@ namespace LATwo
             //TODO: THIS.
             body.velocity = Vector2.zero;
             Message<GameOver>.Raise(new GameOver() { finalScore = CurrentScore, playerDied = true } );
+            vulnerable = false;
         }
 
         private void FixedUpdate()

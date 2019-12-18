@@ -8,7 +8,7 @@ namespace LATwo
 {
     public class HighscoreKeeper
     {
-        private static readonly string saveFile = Application.dataPath + "/highscores.sf";
+        private static readonly string saveFile = Application.persistentDataPath + "/highscores.sf";
         private static List<Score> scores = new List<Score>();
 
         static HighscoreKeeper()
@@ -27,7 +27,7 @@ namespace LATwo
 
         static void Save()
         {
-            var stream = File.Open(saveFile, FileMode.CreateNew);
+            var stream = File.Open(saveFile, FileMode.Create);
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(stream, scores);
             stream.Flush();
@@ -37,7 +37,7 @@ namespace LATwo
         static void EventAddScore(VerifyScore v)
             => AddScore(v.score, v.name); 
 
-        static void AddScore(int score, string name)
+        public static void AddScore(int score, string name)
         {
             var s = new Score()
             {
@@ -81,7 +81,7 @@ namespace LATwo
 
             public override string ToString()
             {
-                return $"{name}: {score} : {date.Day}.{date.Month}.{date.Year}";
+                return $"{name}: {score.ToScoreString(6)} : {date.Day}.{date.Month}.{date.Year}";
             }
         }
     }
