@@ -45,19 +45,21 @@ namespace LATwo
                 name = name,
                 date = DateTime.Now
             };
-            if(scores.Count == 0)
-            {
-                scores.Add(s);
-                return;
-            }
-            for (int i = 0; i < scores.Count; i++)
-            {
-                if (s.score > scores[i].score)
-                {
-                    scores.Insert(i, s);
-                    break;
-                }
-            }
+            scores.Add(s);
+            scores.Sort(new ScoreComparer());
+            //if(scores.Count == 0)
+            //{
+            //    scores.Add(s);
+            //    return;
+            //}
+            //for (int i = 0; i < scores.Count; i++)
+            //{
+            //    if (s.score > scores[i].score)
+            //    {
+            //        scores.Insert(i, s);
+            //        break;
+            //    }
+            //}
             Save();
         }
 
@@ -82,6 +84,14 @@ namespace LATwo
             public override string ToString()
             {
                 return $"{name}: {score.ToScoreString(6)} : {date.Day}.{date.Month}.{date.Year}";
+            }
+        }
+
+        internal class ScoreComparer : IComparer<Score>
+        {
+            public int Compare(Score x, Score y)
+            {
+                return (x.score > y.score ? -1 : (x.score < y.score ? 1 : (x.date > y.date ? -1 : 1)));
             }
         }
     }
