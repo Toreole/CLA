@@ -85,7 +85,7 @@ namespace LATwo
             int scores = HighscoreKeeper.GetScoreTexts(ref texts);
             for (int i = 0; i < scores; i++)
             {
-                allText += $"{texts[i]}\n";
+                allText += (i%2 == 0) ? $"{texts[i]} " : $"| {texts[i]}\n";
             }
             highscoreListContent.text = allText;
         }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 namespace LATwo
@@ -18,6 +19,7 @@ namespace LATwo
         protected float fadeTime;
 
         protected BGMState bgmState = BGMState.None;
+        protected HashSet<AudioClip> clips = new HashSet<AudioClip>();
 
         public enum BGMState
         {
@@ -89,6 +91,11 @@ namespace LATwo
             }
         }
 
+        private void LateUpdate()
+        {
+            clips.Clear();
+        }
+
         IEnumerator CrossFade(AudioSource a, AudioSource b)
         {
             for(float t = 0f; t < fadeTime; t+= Time.deltaTime)
@@ -111,6 +118,12 @@ namespace LATwo
         }
 
         //yeet
-        public static void PlaySFX(AudioClip clip) => instance.sfxAudio.PlayOneShot(clip);
+        public static void PlaySFX(AudioClip clip)
+        {
+            if (instance.clips.Contains(clip))
+                return;
+            instance.clips.Add(clip);
+            instance.sfxAudio.PlayOneShot(clip);
+        }
     }
 }

@@ -39,6 +39,16 @@ namespace LATwo
         protected bool vulnerable = true;
 
         public static int CurrentScore { get; private set; }
+        protected float actualScore = 0;
+        protected float scoreMultiplier = 1.0f;
+        protected int enemiesKilled;
+        protected bool gotDamage = false;
+
+        [Header("Score")]
+        [SerializeField]
+        protected float scoreMulGain = 0.1f;
+        [SerializeField]
+        protected int enemiesForMulGain = 5;
         
         protected void StartGame(GameStarted start)
         {
@@ -74,6 +84,12 @@ namespace LATwo
 
         void OnClearStage(StageCleared st)
         {
+            if(!gotDamage)
+            {
+                scoreMultiplier += 1;
+                Message<ScoreMultiplierChange>.Raise(new ScoreMultiplierChange(scoreMultiplier, 1));
+            }
+            gotDamage = false;
             canMove = false;
             vulnerable = false;
             body.velocity = Vector2.zero;
@@ -175,6 +191,14 @@ namespace LATwo
             if (!vulnerable)
                 return;
             base.Damage(amount);
+            //score decrease
+            actualScore = Mathf.Clamp(actualScore - 5, 0, 999999);
+            CurrentScore = Mathf.RoundToInt(actualScore);
+            //yeet 
+            Message<ScoreMultiplierChange>.Raise(new ScoreMultiplierChange(1.0f, 1f - scoreMultiplier));
+            scoreMultiplier = 1.0f;
+            gotDamage = true;
+
             var dmg = new PlayerDamaged
             {
                 newHealth = currentHealth,
@@ -195,7 +219,17 @@ namespace LATwo
         //since the return to pool message is called on enemies when they die, this works
         void UpdateScore(ReturnToPool<EnemyBehaviour> enemy)
         {
-            CurrentScore += enemy.value.Settings.pointValue;
+            actualScore += enemy.value.Settings.pointValue * scoreMultiplier;
+            CurrentScore = Mathf.RoundToInt(actualScore);
+
+            enemiesKilled++;
+            if(enemiesKilled >= enemiesForMulGain)
+            {
+                enemiesKilled = 0;
+                scoreMultiplier += scoreMulGain;
+                Message<ScoreMultiplierChange>.Raise(new ScoreMultiplierChange(scoreMultiplier, scoreMulGain));
+            }
+
             //update score, then update UI
             scoreDisplay.text = CurrentScore.ToScoreString(scoreLength);
         }

@@ -126,7 +126,7 @@ namespace LATwo
 
         private void OnEnable()
         {
-            lastShotTime = Time.time;
+            lastShotTime = Time.time + Random.Range(-1f, 1f); //randomize the time a bit so they dont all sync
             gameObject.AddComponent<PolygonCollider2D>();
             Message<GameOver>.Add(OnGameOver);
         }

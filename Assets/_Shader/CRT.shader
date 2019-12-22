@@ -84,7 +84,7 @@
 	
 				return float2(
 					uv.x,
-					uv.y + amount * rand // * sin(uv.y * iResolution.y * 0.12 + iTime)
+					uv.y + 0.5 * amount * rand // * sin(uv.y * iResolution.y * 0.12 + iTime)
 				);
 			}
 

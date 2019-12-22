@@ -62,4 +62,16 @@ namespace LATwo
     {
 
     }
+
+    public struct ScoreMultiplierChange
+    {
+        public float multiplier;
+        public float delta;
+
+        public ScoreMultiplierChange(float m, float d)
+        {
+            multiplier = m;
+            delta = d;
+        }
+    }
 }

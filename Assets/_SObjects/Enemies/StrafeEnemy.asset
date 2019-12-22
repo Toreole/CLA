@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 41501e7a69e7aa64d951c8ccafb66c75, type: 3}
   tint: {r: 0.9245283, g: 0.16135636, b: 0.16135636, a: 1}
-  pointValue: 15
+  pointValue: 40
   speed: 1
   health: 1
   attackRate: 1
