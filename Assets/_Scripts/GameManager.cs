@@ -35,6 +35,7 @@ namespace LATwo
                 instance = this;
                 DontDestroyOnLoad(gameObject);
             }
+            HighscoreKeeper.Init();
             SceneManager.LoadScene(menuScene); //complete this and open the menu. 
         }
 

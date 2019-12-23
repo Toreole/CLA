@@ -11,7 +11,7 @@ namespace LATwo
         private static readonly string saveFile = Application.persistentDataPath + "/highscores.sf";
         private static List<Score> scores = new List<Score>();
 
-        static HighscoreKeeper()
+        public static void Init()
         {
             //upon starting the game, the old savefile should already be loaded.
             if(File.Exists(saveFile))

@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuScene: Menu
   playerPreloadScene: Player_Setup
-  firstLevel: Level_0
+  firstLevel: Level_00
   sfxAudio: {fileID: 1547524930}
   bgm_A: {fileID: 1229682977}
   bgm_B: {fileID: 1928182612}
