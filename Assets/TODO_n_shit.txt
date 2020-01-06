@@ -1,22 +1,14 @@
 ----- TODO -----
 
->>> Game End Screen -> show on GameOver event
-	> show GAME OVER / YOU WON depending on the thingy
-	> click to continue
-	> input n stuff
-	> send to score list.
+>> in-game menu (pause).
+>> need more events. (5 more)...
+> Write documentation.
 
->> fix stationary enemies
->> fix enemy sound (they all fire at the exact same time and it bunches up)
-
-> EXPLOSION!
-	> power up basically
-
-> UI!!!!
+> UI
 	> small text onCollectPowerup (+attackrate/etc.) 
 		> also on lose powerup? maybe.
 
----- List of Message i use ---- > i need more?!?!?! bruhhhh
+---- List of Message i use ---- 
 > Return To Pool (4):
 	> DeathParticle
 	> Enemy
@@ -24,12 +16,10 @@
 	> Powerup
 > Player Damaged (1)
 > Player pickup powerup (1)
-> VerifyScore (1)
 > GameOver (1)
 > Game Started (1)
 > Stage Clear (1)
 > Stage Start (1)
-
 
 --- archived ---
 > secondary camera with rendertexture for some cool shit i suppose
@@ -75,3 +65,9 @@
 		> text too dark to read
 >> endscreen music
 		> convert to capital only
+		
+>>> Game End Screen -> show on GameOver event
+	> show GAME OVER / YOU WON depending on the thingy
+	> click to continue
+	> input n stuff
+	> send to score list.
