@@ -5,8 +5,6 @@ namespace LATwo
 {
     public class PlayerController : Entity
     {
-        public static Vector2 Position { get; private set; } //hacky but necessary
-
         [SerializeField] //primary input
         protected string horizontalInput = "Horizontal",
             verticalInput = "Vertical",
@@ -49,7 +47,10 @@ namespace LATwo
         protected float scoreMulGain = 0.1f;
         [SerializeField]
         protected int enemiesForMulGain = 5;
-        
+
+        //current active player, should never be null realistically.
+        public static PlayerController current;
+
         protected void StartGame(GameStarted start)
         {
             canMove = true;
@@ -58,6 +59,7 @@ namespace LATwo
 
         private void OnEnable()
         {
+            current = this;
             scoreDisplay.text = CurrentScore.ToScoreString(scoreLength);
             Message<ReturnToPool<EnemyBehaviour>>.Add(UpdateScore);
             Message<PickupPowerup>.Add(ApplyPowerup);
@@ -150,9 +152,6 @@ namespace LATwo
             //target movement for this frame.
             movementInput *= speed;
             body.velocity = movementInput;
-
-            //update position at the end of this fixedupdate lol
-            Position = body.position;
         }
 
         private void Update()
@@ -219,7 +218,7 @@ namespace LATwo
         //since the return to pool message is called on enemies when they die, this works
         void UpdateScore(ReturnToPool<EnemyBehaviour> enemy)
         {
-            actualScore += enemy.value.Settings.pointValue * scoreMultiplier;
+            actualScore += enemy.value.PointValue * scoreMultiplier;
             CurrentScore = Mathf.RoundToInt(actualScore);
 
             enemiesKilled++;

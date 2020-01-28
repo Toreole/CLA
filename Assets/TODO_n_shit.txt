@@ -7,6 +7,11 @@
 > UI
 	> small text onCollectPowerup (+attackrate/etc.) 
 		> also on lose powerup? maybe.
+	> REPLACE THE UGLY CURSOR GODDAMNIT (Crosshair)
+
+> possible
+	> "snake" type enemy, would be kinda cool
+		> needs slight rework of enemy logic and behaviour.
 
 ---- List of Message i use ---- 
 > Return To Pool (4):

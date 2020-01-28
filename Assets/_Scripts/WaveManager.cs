@@ -33,12 +33,11 @@ namespace LATwo
                 for(int i = 0; i < wave.amount; i++)
                 {
                     var enemy = EnemyPool.GetPoolObject();
-                    enemy.Settings = wave.enemyType;
+                    enemy.FullInit(wave.enemyType, PlayerController.current.transform);
                     var pos = GetRandomPosition(wave);
                     while (!PositionIsValid(pos))
                         pos = GetRandomPosition(wave);
                     enemy.transform.position = GetRandomPosition(wave);
-                    enemy.gameObject.SetActive(true);
 
                 }
                 yield return new WaitForSeconds(wave.time);

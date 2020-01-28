@@ -6,16 +6,6 @@ namespace LATwo
 {
     public class EnemyBehaviour : Entity
     {
-        //i like properties
-        public Enemy Settings {
-            get { return settings; }
-            set {
-                settings = value;
-                currentHealth = settings.health;
-                this.Sprite = settings.sprite;
-                renderer.color = settings.tint;
-            }
-        }
         protected Enemy settings;
 
         protected float lastShotTime;
@@ -27,11 +17,23 @@ namespace LATwo
         Vector2 direction;
         float dist;
 
+        //TODO: THIS: property set??
+        public Transform follow;
+        public Transform target;
+
         private bool isFrozen = false;
+        public event System.Action OnEnemyDied;
+
+        public int PointValue => settings.pointValue;
 
         protected override void Die()
         {
             Message<ReturnToPool<EnemyBehaviour>>.Raise(this);
+
+            //invoke local event and clear the delegate.
+            OnEnemyDied?.Invoke();
+            OnEnemyDied = null;
+
             //this used to be ondisable, but Die works just as fine
             inStrafeDistance = false;
             Destroy(GetComponent<PolygonCollider2D>()); //weird fix
@@ -54,18 +56,21 @@ namespace LATwo
         {
             if (isFrozen)
                 return;
-
             //Movement and shooting.
-            direction = (PlayerController.Position - body.position).normalized;
+            direction = ((Vector2)target.position - body.position).normalized;
 
-            if (Settings.movePattern == MovementType.Strafe)
+            if (settings.movePattern == MovementType.Strafe)
                 Strafe();
-            else if (Settings.movePattern == MovementType.FollowPlayer)
+            else if (settings.movePattern == MovementType.FollowPlayer)
                 FollowPlayer();
-            else if (Settings.movePattern == MovementType.Stationary)
+            else if (settings.movePattern == MovementType.Stationary)
             {
                 transform.up = direction;
                 body.velocity = Vector2.zero;
+            }
+            else //movePattern == MovementType.Worm
+            {
+                WormAlong();
             }
 
             Shoot();
@@ -75,7 +80,7 @@ namespace LATwo
         {
             if (settings.movePattern == MovementType.Strafe && !inStrafeDistance) //strafe should only shoot while in their distance.
                 return;
-            else if (dist > settings.attackRange) //out of range
+            if (dist > settings.attackRange) //out of range
                 return;
             if(Time.time - lastShotTime >= settings.attackRate)
             {
@@ -90,9 +95,14 @@ namespace LATwo
             body.velocity = direction * settings.speed;
         }
 
+        void WormAlong()
+        {
+
+        }
+
         void Strafe()
         {
-            dist = Vector2.Distance(PlayerController.Position, body.position);
+            dist = Vector2.Distance(follow.position, body.position);
             if (!inStrafeDistance)
             {
                 if (dist > settings.preferredStrafeDistance + settings.strafeTolerance)
@@ -120,7 +130,7 @@ namespace LATwo
             //2 move to the new position.
             Vector2 offset = Quaternion.AngleAxis(strafeAngle, Vector3.forward) * Vector2.right;
             offset *= localStrafeDistance;
-            body.MovePosition(PlayerController.Position + offset);
+            body.MovePosition((Vector2)follow.position + offset);
             transform.up = direction;
         }
 
@@ -141,6 +151,7 @@ namespace LATwo
             isFrozen = true;
         }
 
+        //TODO: think about this
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if(collision.gameObject.CompareTag("Wall"))
@@ -148,6 +159,45 @@ namespace LATwo
                 //wall.
                 strafeDirection *= -1;
             }
+        }
+
+        public void FullInit(Enemy eType, Transform target)
+        {
+            Init(eType, target);
+            //Do things based on the settings.
+            if(eType.movePattern == MovementType.Worm)
+            {
+                //instantiate other worm parts behind this one right away.
+                EnemyBehaviour previousSegment = this;
+                for(int i = 0; i < settings.chainLength; i++)
+                {
+                    var segment = EnemyPool.GetPoolObject();
+                    segment.follow = previousSegment.transform;
+
+                    //next segment should listen for when the segment in front of it died.
+                    previousSegment.OnEnemyDied += segment.SetHead;
+                    previousSegment = segment;
+                    //init the segment
+                    segment.Init(eType, target);
+                }
+            }
+        }
+
+        //not having a follow target as a worm makes you act as head of the subworm.
+        void SetHead()
+        {
+            follow = null;
+        }
+
+        public void Init(Enemy eType, Transform target)
+        {
+            //initialize all the enemy stuff like sprites n shit
+            settings = eType;
+            currentHealth = eType.health;
+            this.Sprite = eType.sprite;
+            renderer.color = settings.tint;
+            this.target = target;
+            gameObject.SetActive(true);
         }
     }
 }

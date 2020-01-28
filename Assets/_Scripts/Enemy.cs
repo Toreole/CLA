@@ -18,16 +18,19 @@ namespace LATwo
         public float health;
         public float attackRate;
         public float attackRange;
+
+        //Move patterns depend on the SO.
         public MovementType movePattern;
         public float preferredStrafeDistance;
         public float strafeTolerance = 0.5f;
         public float strafeSpeed;
-        public Projectile projectile; 
+        public Projectile projectile;
+        public int chainLength;
     }
 
     public enum MovementType
     {
-        FollowPlayer, Strafe, Stationary
+        FollowPlayer, Strafe, Stationary, Worm
     }
 
 #if UNITY_EDITOR
@@ -62,6 +65,9 @@ namespace LATwo
                     e.preferredStrafeDistance = EditorGUILayout.FloatField("Strafe Distance", e.preferredStrafeDistance);
                     e.strafeTolerance = EditorGUILayout.FloatField("Strafe Tolerance", e.strafeTolerance);
                     e.strafeSpeed = EditorGUILayout.FloatField("Angular SPeed", e.strafeSpeed);
+                    break;
+                case MovementType.Worm:
+                    e.chainLength = EditorGUILayout.IntField("Worm Length", e.chainLength);
                     break;
             }
         }
