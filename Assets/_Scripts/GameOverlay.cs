@@ -9,16 +9,22 @@ namespace LATwo
     public class GameOverlay : MonoBehaviour
     {
         [SerializeField]
-        protected GameObject stageClearText; 
-        
+        protected GameObject stageClearText;
+        [SerializeField]
+        protected string menuScene = "Menu";
+        [SerializeField]
+        protected GameObject promptPrefab;
+
         private void OnEnable()
         {
             Message<StageCleared>.Add(StageClear);
+            Message<PromptText>.Add(ShowPrompt);
         }
 
         private void OnDisable()
         {
             Message<StageCleared>.Remove(StageClear);
+            Message<PromptText>.Remove(ShowPrompt);
         }
 
         void StageClear(StageCleared st)
@@ -30,6 +36,16 @@ namespace LATwo
                 yield return new WaitForSeconds(t);
                 stageClearText.SetActive(false);
             }
+        }
+
+        public void GoToMenu()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(menuScene);
+        }
+
+        void ShowPrompt(PromptText prompt)
+        {
+
         }
     }
 }

@@ -74,4 +74,14 @@ namespace LATwo
             delta = d;
         }
     }
+
+    public struct PromptText
+    {
+        public string text;
+
+        public PromptText(string t)
+        {
+            text = t;
+        }
+    }
 }

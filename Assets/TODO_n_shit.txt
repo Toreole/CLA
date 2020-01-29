@@ -1,17 +1,15 @@
 ----- TODO -----
 
 >> in-game menu (pause).
->> need more events. (5 more)...
+	> the object is there, just need 2 do the actual pausing.
+	> timescale?
+>> need more events. (4 more)...
 > Write documentation.
 
 > UI
 	> small text onCollectPowerup (+attackrate/etc.) 
 		> also on lose powerup? maybe.
-	> REPLACE THE UGLY CURSOR GODDAMNIT (Crosshair)
 
-> possible
-	> "snake" type enemy, would be kinda cool
-		> needs slight rework of enemy logic and behaviour.
 
 ---- List of Message i use ---- 
 > Return To Pool (4):
@@ -25,6 +23,7 @@
 > Game Started (1)
 > Stage Clear (1)
 > Stage Start (1)
+> Prompt Text (1)
 
 --- archived ---
 > secondary camera with rendertexture for some cool shit i suppose
@@ -76,3 +75,8 @@
 	> click to continue
 	> input n stuff
 	> send to score list.
+
+	> REPLACE THE UGLY CURSOR GODDAMNIT (Crosshair)
+
+> possible
+	> "snake" type enemy, would be kinda cool
