@@ -16,6 +16,7 @@ namespace LATwo
             get => powerup;
             set
             {
+                transform.localScale = Vector3.one;
                 powerup = value;
                 gameObject.SetActive(true);
                 renderer.sprite = powerup.sprite;
@@ -38,6 +39,11 @@ namespace LATwo
         IEnumerator DeactivateLater()
         {
             yield return new WaitForSeconds(powerup.lifeTime);
+            for(float t = 0; t < 0.75f; t += Time.deltaTime)
+            {
+                transform.localScale = Vector3.one * (1f - t / 0.75f);
+                yield return null;
+            }
             Message<ReturnToPool<PowerupBehaviour>>.Raise(this);
         }
     }

@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 6156274404012684706}
   renderer: {fileID: 6156274404012684704}
+  follow: {fileID: 0}
+  target: {fileID: 0}
 --- !u!50 &6156274404012684706
 Rigidbody2D:
   serializedVersion: 4
@@ -67,7 +69,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &6156274404012684704
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -52,7 +52,7 @@ namespace LATwo
             if (!Settings.homing) //! homing projectiles only used by enemies, not by the player.
                 return;
             //homing missiles should change trajectory around z axis (rotation);
-            float angle = Vector2.SignedAngle(transform.up, ((Vector2)PlayerController.current.transform.position - body.position).normalized);
+            float angle = Vector2.SignedAngle(transform.up, ((Vector2)PlayerController.current.transform.position - body.position));
             //the angle betwee the movement and shit.
             body.rotation += (angle > 0? 1 : -1) * Mathf.Clamp(Settings.turnSpeed * Time.deltaTime, 0f, Mathf.Abs(angle));
             //print(angle);

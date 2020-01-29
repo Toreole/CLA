@@ -26,6 +26,7 @@ namespace LATwo
         public float strafeSpeed;
         public Projectile projectile;
         public int chainLength;
+        public float segmentSize;
     }
 
     public enum MovementType
@@ -67,7 +68,10 @@ namespace LATwo
                     e.strafeSpeed = EditorGUILayout.FloatField("Angular SPeed", e.strafeSpeed);
                     break;
                 case MovementType.Worm:
+                    e.speed = EditorGUILayout.FloatField("Max Speed", e.speed);
                     e.chainLength = EditorGUILayout.IntField("Worm Length", e.chainLength);
+                    e.strafeSpeed = EditorGUILayout.FloatField("Turn Speed", e.strafeSpeed);
+                    e.segmentSize = EditorGUILayout.FloatField("Segment Size", e.segmentSize);
                     break;
             }
         }

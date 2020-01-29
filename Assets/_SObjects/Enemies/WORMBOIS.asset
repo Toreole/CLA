@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfbc773501a7e8d4cb9de51e30372c1d, type: 3}
-  m_Name: StrafeEnemy
+  m_Name: WORMBOIS
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 41501e7a69e7aa64d951c8ccafb66c75, type: 3}
-  tint: {r: 0.9245283, g: 0.16135636, b: 0.16135636, a: 1}
-  pointValue: 40
-  speed: 1
-  health: 1
-  attackRate: 1
-  attackRange: 20
-  movePattern: 1
-  preferredStrafeDistance: 8
-  strafeTolerance: 0.2
-  strafeSpeed: 20
+  tint: {r: 0.5943396, g: 0.5050491, b: 0, a: 1}
+  pointValue: 20
+  speed: 8
+  health: 2
+  attackRate: 2
+  attackRange: 10
+  movePattern: 3
+  preferredStrafeDistance: 0
+  strafeTolerance: 0.5
+  strafeSpeed: 60
   projectile: {fileID: 11400000, guid: d2f810a3b5ee8564e988976497462421, type: 2}
-  chainLength: 0
-  segmentSize: 0
+  chainLength: 6
+  segmentSize: 1.05

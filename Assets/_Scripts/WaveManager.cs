@@ -26,7 +26,12 @@ namespace LATwo
             Message<StageStarted>.Raise(default);
             yield return new WaitForSeconds(startOffset);
             foreach (var x in waves)
-                totalEnemies += x.amount;
+            {
+                if (x.enemyType.movePattern == MovementType.Worm)
+                    totalEnemies += x.amount * x.enemyType.chainLength;
+                else
+                    totalEnemies += x.amount;
+            }
 
             foreach(Wave wave in waves)
             {

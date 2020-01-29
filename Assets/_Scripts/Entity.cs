@@ -10,6 +10,7 @@ namespace LATwo
         protected new SpriteRenderer renderer;
 
         public Sprite Sprite { set { renderer.sprite = value; } }
+        public Rigidbody2D Body => body;
 
         protected float currentHealth;
 

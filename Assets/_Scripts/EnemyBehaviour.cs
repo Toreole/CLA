@@ -16,9 +16,10 @@ namespace LATwo
 
         Vector2 direction;
         float dist;
+        float currentSpeed;
 
         //TODO: THIS: property set??
-        public Transform follow;
+        public Entity follow;
         public Transform target;
 
         private bool isFrozen = false;
@@ -97,12 +98,52 @@ namespace LATwo
 
         void WormAlong()
         {
-
+            //follow the other segment
+            if(follow != null)
+            {
+                //update rotation
+                transform.rotation = Quaternion.LookRotation(Vector3.forward, follow.Body.position - body.position);
+                //update velocity.
+                Vector2 offset = (body.position - follow.Body.position).normalized * settings.segmentSize;
+                Vector2 targetPos = follow.Body.position + offset;
+                var vel = (targetPos - body.position) / Time.deltaTime;
+                body.velocity = vel;
+            }
+            else //head toward the player.
+            {
+                //1. ROTATE TO FACE THE PLAYER.
+                float angle = Vector2.SignedAngle(transform.up, (PlayerController.current.Body.position - body.position).normalized);
+                //the angle betwee the movement and shit.
+                float turnSpeed = settings.strafeSpeed * Time.deltaTime;
+                body.rotation += Mathf.Clamp(angle, -turnSpeed, turnSpeed);
+                
+                //2. IF WITHIN 25° OF THE FOV, ACCELERATE TO MAXSPEED, ELSE GO DOWN TO A THIRD
+                if(Mathf.Abs(angle) < 25)
+                {
+                    //body.velocity = Vector2.MoveTowards(body.velocity, transform.up * settings.speed, (settings.speed / 2f) * Time.deltaTime);
+                    currentSpeed = Mathf.Clamp((settings.speed / 2f) * Time.deltaTime + currentSpeed, 0, settings.speed);
+                    body.velocity = transform.up * currentSpeed;
+                }
+                else
+                {
+                    //body.velocity = Vector2.MoveTowards(body.velocity, transform.up * (settings.speed / 3f), (settings.speed / 2f) * Time.deltaTime);
+                    if(currentSpeed < settings.speed / 3f)
+                    {
+                        currentSpeed += (settings.speed / 2f) * Time.deltaTime;
+                    }
+                    else
+                    {
+                        currentSpeed = Mathf.Clamp(currentSpeed - (settings.speed / 2f) * Time.deltaTime, 0, settings.speed);
+                    }
+                    body.velocity = transform.up * currentSpeed;
+                }
+                //body.velocity = settings.speed * transform.up; //update velocity
+            }
         }
 
         void Strafe()
         {
-            dist = Vector2.Distance(follow.position, body.position);
+            dist = Vector2.Distance(follow.transform.position, body.position);
             if (!inStrafeDistance)
             {
                 if (dist > settings.preferredStrafeDistance + settings.strafeTolerance)
@@ -130,7 +171,7 @@ namespace LATwo
             //2 move to the new position.
             Vector2 offset = Quaternion.AngleAxis(strafeAngle, Vector3.forward) * Vector2.right;
             offset *= localStrafeDistance;
-            body.MovePosition((Vector2)follow.position + offset);
+            body.MovePosition((Vector2)follow.transform.position + offset);
             transform.up = direction;
         }
 
@@ -167,19 +208,27 @@ namespace LATwo
             //Do things based on the settings.
             if(eType.movePattern == MovementType.Worm)
             {
+                transform.up = Vector3.left;
                 //instantiate other worm parts behind this one right away.
                 EnemyBehaviour previousSegment = this;
-                for(int i = 0; i < settings.chainLength; i++)
+                for(int i = 0; i < settings.chainLength-1; i++)
                 {
                     var segment = EnemyPool.GetPoolObject();
-                    segment.follow = previousSegment.transform;
+                    segment.follow = previousSegment;
 
                     //next segment should listen for when the segment in front of it died.
                     previousSegment.OnEnemyDied += segment.SetHead;
                     previousSegment = segment;
                     //init the segment
                     segment.Init(eType, target);
+                    segment.Body.position = Body.position + Vector2.right * i * settings.segmentSize;
+                    segment.transform.up = Vector3.left;
                 }
+                this.follow = null;
+            }
+            else
+            {
+                follow = PlayerController.current;
             }
         }
 
