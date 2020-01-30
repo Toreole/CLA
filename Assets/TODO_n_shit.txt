@@ -3,7 +3,7 @@
 >> in-game menu (pause).
 	> the object is there, just need 2 do the actual pausing.
 	> timescale?
->> need more events. (4 more)...
+>> need more events. (2 more)...
 > Write documentation.
 
 > UI
@@ -24,6 +24,8 @@
 > Stage Clear (1)
 > Stage Start (1)
 > Prompt Text (1)
+> PauseGame (1)
+> ContinueGame(1)
 
 --- archived ---
 > secondary camera with rendertexture for some cool shit i suppose

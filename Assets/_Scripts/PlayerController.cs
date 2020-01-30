@@ -42,6 +42,8 @@ namespace LATwo
         protected int enemiesKilled;
         protected bool gotDamage = false;
 
+        protected bool gamePaused = false;
+
         [Header("Score")]
         [SerializeField]
         protected float scoreMulGain = 0.1f;
@@ -101,6 +103,7 @@ namespace LATwo
         void ApplyPowerup(PickupPowerup powerup)
         {
             var p = powerup.value;
+            PromptText prompt;
             switch(p.type)
             {
                 case PowerupType.Health:
@@ -109,21 +112,29 @@ namespace LATwo
                     currentHealth = Mathf.Clamp(currentHealth + p.effectStrength, 0f, maxHealth);
                     //print(currentHealth);
                     Message<PlayerDamaged>.Raise(new PlayerDamaged() { newHealth = currentHealth, damage = 0f });
+                    prompt = $"+ Health";
                     break;
                 case PowerupType.Projectile:
                     secondaryProjectile = p.projectile;
                     secondaryAmmo = (int)p.effectStrength;
+                    prompt = $"+ Special Ammo";
                     break;
                 case PowerupType.Speed:
                     speed += p.effectStrength;
                     StartCoroutine(RemoveSpeed(p.effectStrength, p.effectLength));
+                    prompt = $"+ Speed";
                     break;
                 case PowerupType.Firerate:
                     attackRate /= p.effectStrength;
                     StartCoroutine(RemoveFireBoost(p.effectStrength, p.effectLength));
-                    break; 
-
+                    prompt = $"+ Firerate";
+                    break;
+                default:
+                    prompt = "";
+                    break;
             }
+            prompt.color = powerup.value.tint;
+            Message<PromptText>.Raise(prompt);
         }
 
         IEnumerator RemoveSpeed(float strength, float length)
@@ -157,6 +168,16 @@ namespace LATwo
         private void Update()
         {
             if (currentHealth <= 0 || !canMove)
+                return;
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                gamePaused ^= true; //hah, inverted!
+                if (gamePaused)
+                    Message<PauseGame>.Raise(new PauseGame());
+                else
+                    Message<ContinueGame>.Raise(new ContinueGame());
+            }
+            if (gamePaused)
                 return;
             //movement input
             movementInput.x = Input.GetAxisRaw(horizontalInput);

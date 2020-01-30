@@ -45,12 +45,10 @@ namespace LATwo
 
     public struct GameStarted
     {
-
     }
 
     public struct LevelChanged
     {
-
     }
 
     public struct StageCleared
@@ -60,7 +58,6 @@ namespace LATwo
 
     public struct StageStarted
     {
-
     }
 
     public struct ScoreMultiplierChange
@@ -78,10 +75,14 @@ namespace LATwo
     public struct PromptText
     {
         public string text;
+        public Color color;
+        public static implicit operator PromptText(string obj) { return new PromptText { text = obj }; }
+    }
 
-        public PromptText(string t)
-        {
-            text = t;
-        }
+    public struct PauseGame
+    {
+    }
+    public struct ContinueGame
+    {
     }
 }
