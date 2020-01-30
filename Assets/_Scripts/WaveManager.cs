@@ -33,16 +33,17 @@ namespace LATwo
                     totalEnemies += x.amount;
             }
 
+            var player = PlayerController.current.transform;
             foreach(Wave wave in waves)
             {
                 for(int i = 0; i < wave.amount; i++)
                 {
                     var enemy = EnemyPool.GetPoolObject();
-                    enemy.FullInit(wave.enemyType, PlayerController.current.transform);
+                    enemy.FullInit(wave.enemyType, player);
                     var pos = GetRandomPosition(wave);
                     while (!PositionIsValid(pos))
                         pos = GetRandomPosition(wave);
-                    enemy.transform.position = GetRandomPosition(wave);
+                    enemy.transform.position = pos + (Vector2)player.position;
 
                 }
                 yield return new WaitForSeconds(wave.time);

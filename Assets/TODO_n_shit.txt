@@ -1,15 +1,9 @@
 ----- TODO -----
 
->> in-game menu (pause).
-	> the object is there, just need 2 do the actual pausing.
-	> timescale?
 >> need more events. (2 more)...
 > Write documentation.
 
-> UI
-	> small text onCollectPowerup (+attackrate/etc.) 
-		> also on lose powerup? maybe.
-
+> modify waves
 
 ---- List of Message i use ---- 
 > Return To Pool (4):
@@ -82,3 +76,12 @@
 
 > possible
 	> "snake" type enemy, would be kinda cool
+
+	
+>> in-game menu (pause).
+	> the object is there, just need 2 do the actual pausing.
+	> timescale?
+	
+> UI
+	> small text onCollectPowerup (+attackrate/etc.) 
+		> also on lose powerup? maybe.

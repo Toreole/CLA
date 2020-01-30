@@ -435,6 +435,11 @@ PrefabInstance:
       propertyPath: enemiesForMulGain
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6294749525331609797, guid: aeeffd4f868ca5c4c9f6a001796c5bb4,
+        type: 3}
+      propertyPath: attackRate
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 1601956773, guid: aeeffd4f868ca5c4c9f6a001796c5bb4, type: 3}
       propertyPath: m_Layer
       value: 11

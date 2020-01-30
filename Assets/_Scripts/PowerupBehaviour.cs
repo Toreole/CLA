@@ -27,13 +27,9 @@ namespace LATwo
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            //print("ree");
-            if (collision.CompareTag(playerTag))
-            {
                 StopAllCoroutines();
                 Message<PickupPowerup>.Raise(powerup);
                 Message<ReturnToPool<PowerupBehaviour>>.Raise(this);
-            }
         }
 
         IEnumerator DeactivateLater()

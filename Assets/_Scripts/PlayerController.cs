@@ -167,6 +167,8 @@ namespace LATwo
 
         private void Update()
         {
+            Shader.SetGlobalVector("_PlayerPos", transform.position);
+
             if (currentHealth <= 0 || !canMove)
                 return;
             if(Input.GetKeyDown(KeyCode.Escape))
