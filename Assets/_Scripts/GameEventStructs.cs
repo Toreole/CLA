@@ -47,10 +47,6 @@ namespace LATwo
     {
     }
 
-    public struct LevelChanged
-    {
-    }
-
     public struct StageCleared
     {
         public float bufferTime;
@@ -60,12 +56,12 @@ namespace LATwo
     {
     }
 
-    public struct ScoreMultiplierChange
+    public struct ScoreMultiplierChanged
     {
         public float multiplier;
         public float delta;
 
-        public ScoreMultiplierChange(float m, float d)
+        public ScoreMultiplierChanged(float m, float d)
         {
             multiplier = m;
             delta = d;

@@ -14,15 +14,15 @@ namespace LATwo
 
         private void OnEnable()
         {
-            Message<ScoreMultiplierChange>.Add(OnScoreMulChange);
+            Message<ScoreMultiplierChanged>.Add(OnScoreMulChange);
         }
 
         private void OnDisable()
         {
-            Message<ScoreMultiplierChange>.Remove(OnScoreMulChange);
+            Message<ScoreMultiplierChanged>.Remove(OnScoreMulChange);
         }
 
-        void OnScoreMulChange(ScoreMultiplierChange change)
+        void OnScoreMulChange(ScoreMultiplierChanged change)
         {
             if (Mathf.Abs(change.delta) < 0.1f)
                 return;

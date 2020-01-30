@@ -1,7 +1,8 @@
-CLA : Coding Leistungsanforderung kekw
+CLA : Coding Leistungsanforderung
 
 Movement: WASD
 Shoot: Left Click (hold)
+Pause/Unpause: Escape
 
 Destroy enemies to get a higher score multiplier.
 The multiplier gets reset when you get hit.

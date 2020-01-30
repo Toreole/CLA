@@ -91,7 +91,7 @@ namespace LATwo
             if(!gotDamage)
             {
                 scoreMultiplier += 1;
-                Message<ScoreMultiplierChange>.Raise(new ScoreMultiplierChange(scoreMultiplier, 1));
+                Message<ScoreMultiplierChanged>.Raise(new ScoreMultiplierChanged(scoreMultiplier, 1));
             }
             gotDamage = false;
             canMove = false;
@@ -217,7 +217,7 @@ namespace LATwo
             actualScore = Mathf.Clamp(actualScore - 5, 0, 999999);
             CurrentScore = Mathf.RoundToInt(actualScore);
             //yeet 
-            Message<ScoreMultiplierChange>.Raise(new ScoreMultiplierChange(1.0f, 1f - scoreMultiplier));
+            Message<ScoreMultiplierChanged>.Raise(new ScoreMultiplierChanged(1.0f, 1f - scoreMultiplier));
             scoreMultiplier = 1.0f;
             gotDamage = true;
 
@@ -249,7 +249,7 @@ namespace LATwo
             {
                 enemiesKilled = 0;
                 scoreMultiplier += scoreMulGain;
-                Message<ScoreMultiplierChange>.Raise(new ScoreMultiplierChange(scoreMultiplier, scoreMulGain));
+                Message<ScoreMultiplierChanged>.Raise(new ScoreMultiplierChanged(scoreMultiplier, scoreMulGain));
             }
 
             //update score, then update UI
