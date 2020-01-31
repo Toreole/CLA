@@ -33,6 +33,7 @@ namespace LATwo
             Message<PromptText>.Add(ShowPrompt);
             Message<PauseGame>.Add(Pause);
             Message<ContinueGame>.Add(Continue);
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += TestFix;
         }
 
         private void OnDisable()
@@ -41,6 +42,12 @@ namespace LATwo
             Message<PromptText>.Remove(ShowPrompt);
             Message<PauseGame>.Remove(Pause);
             Message<ContinueGame>.Remove(Continue);
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded -= TestFix;
+        }
+
+        void TestFix(UnityEngine.SceneManagement.Scene s, UnityEngine.SceneManagement.LoadSceneMode m)
+        {
+            stageClearText.SetActive(false);
         }
 
         void StageClear(StageCleared st)
@@ -49,8 +56,10 @@ namespace LATwo
             StartCoroutine(DoStageClear(st.bufferTime));
             IEnumerator DoStageClear(float t)
             {
+                print(st.bufferTime);
                 yield return new WaitForSeconds(t);
                 stageClearText.SetActive(false);
+                print("deactivate");
             }
         }
 

@@ -181,6 +181,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
         type: 3}
+      propertyPath: waves.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
       propertyPath: wallLayer.m_Bits
       value: 1
       objectReference: {fileID: 0}
@@ -188,6 +193,86 @@ PrefabInstance:
         type: 3}
       propertyPath: nextLevel
       value: Level_04
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[0].enemyType
+      value: 
+      objectReference: {fileID: 11400000, guid: 64f0015308b04f44d884d7e02fb528b8,
+        type: 2}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[0].time
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[1].enemyType
+      value: 
+      objectReference: {fileID: 11400000, guid: 6368b8fd89cf9da48b72e12b1ff44525,
+        type: 2}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[1].amount
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[2].enemyType
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a6c523de92a2a948b2989ea39968736,
+        type: 2}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[1].time
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[2].time
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[2].amount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[3].enemyType
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b3d22b8345ea1a49a767b2b7d861f3b,
+        type: 2}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[3].time
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[4].enemyType
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b3d22b8345ea1a49a767b2b7d861f3b,
+        type: 2}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[4].amount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[4].time
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[4].minDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442354347402649485, guid: 8a7e94ebfa433d14cae9fb3073362a58,
+        type: 3}
+      propertyPath: waves.Array.data[4].maxDistance
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a7e94ebfa433d14cae9fb3073362a58, type: 3}

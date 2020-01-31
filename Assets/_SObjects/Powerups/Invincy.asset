@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f0359457af752744adadf372f6be6a9, type: 3}
-  m_Name: Attaaackkkk
+  m_Name: Invincy
   m_EditorClassIdentifier: 
-  lifeTime: 7
-  effectStrength: 1.6
-  effectLength: 8
+  lifeTime: 4
+  effectStrength: 0
+  effectLength: 3.5
   projectile: {fileID: 0}
-  type: 3
-  sprite: {fileID: 21300000, guid: 8e67f37351dc2e349987a345b978230d, type: 3}
-  tint: {r: 0.7176471, g: 0.03137254, b: 0.6657519, a: 1}
+  type: 4
+  sprite: {fileID: 21300000, guid: ffecbe7c861e9f34b92a2841c94bf423, type: 3}
+  tint: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}

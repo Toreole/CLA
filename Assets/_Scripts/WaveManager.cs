@@ -87,6 +87,7 @@ namespace LATwo
                 //This should go to the next level, OR show the winning end-screen.
                 if (string.IsNullOrEmpty(nextLevel))
                 {
+                    Message<StageCleared>.Raise(new StageCleared() { bufferTime = 3f }); //TODO: i guess
                     Message<GameOver>.Raise(new GameOver() { finalScore = PlayerController.CurrentScore, playerDied = false });
                 }
                 else

@@ -179,19 +179,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1110439585, guid: 094468ea980395e4592db916cd9b4993, type: 3}
-      propertyPath: powerups.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1110439585, guid: 094468ea980395e4592db916cd9b4993, type: 3}
-      propertyPath: baseSpawnChance
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 1110439585, guid: 094468ea980395e4592db916cd9b4993, type: 3}
-      propertyPath: powerups.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 9943e631cc4549a4982ed5b32c8ffb3b,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 094468ea980395e4592db916cd9b4993, type: 3}
 --- !u!1001 &352218249
@@ -334,6 +321,10 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 16777215
       objectReference: {fileID: 0}
+    - target: {fileID: 1024254837, guid: d419d52a59c6c114ab6f3afb19a21828, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d419d52a59c6c114ab6f3afb19a21828, type: 3}
 --- !u!114 &352218250 stripped
@@ -438,7 +429,7 @@ PrefabInstance:
     - target: {fileID: 6294749525331609797, guid: aeeffd4f868ca5c4c9f6a001796c5bb4,
         type: 3}
       propertyPath: attackRate
-      value: 0.4
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 1601956773, guid: aeeffd4f868ca5c4c9f6a001796c5bb4, type: 3}
       propertyPath: m_Layer

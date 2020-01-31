@@ -93,5 +93,7 @@ MonoBehaviour:
   powerups:
   - {fileID: 11400000, guid: 73e224d44bbda244387a77cd3f0e1e73, type: 2}
   - {fileID: 11400000, guid: 2c659e46c7b1df5419c43ff67a96dae9, type: 2}
-  baseSpawnChance: 0.1
+  - {fileID: 11400000, guid: 9943e631cc4549a4982ed5b32c8ffb3b, type: 2}
+  - {fileID: 11400000, guid: e1188462c5aeae04393637ea38fd8d22, type: 2}
+  baseSpawnChance: 0.05
   enemyCountToAlwaysSpawn: 20

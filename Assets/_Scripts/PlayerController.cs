@@ -121,13 +121,17 @@ namespace LATwo
                     break;
                 case PowerupType.Speed:
                     speed += p.effectStrength;
-                    StartCoroutine(RemoveSpeed(p.effectStrength, p.effectLength));
+                    StartCoroutine(RemoveSpeed(p.effectStrength, p.effectLength, p.tint));
                     prompt = $"+ Speed";
                     break;
                 case PowerupType.Firerate:
                     attackRate /= p.effectStrength;
-                    StartCoroutine(RemoveFireBoost(p.effectStrength, p.effectLength));
+                    StartCoroutine(RemoveFireBoost(p.effectStrength, p.effectLength, p.tint));
                     prompt = $"+ Firerate";
+                    break;
+                case PowerupType.Invincibility:
+                    StartCoroutine(DoInvincible(p.effectLength, p.tint));
+                    prompt = $"+ {p.effectLength.ToString("0.0")}s Invincibility";
                     break;
                 default:
                     prompt = "";
@@ -137,15 +141,31 @@ namespace LATwo
             Message<PromptText>.Raise(prompt);
         }
 
-        IEnumerator RemoveSpeed(float strength, float length)
+        IEnumerator RemoveSpeed(float strength, float length, Color tint)
         {
             yield return new WaitForSeconds(length);
             speed -= strength;
+            PromptText prompt = "- Speed";
+            prompt.color = tint;
+            Message<PromptText>.Raise(prompt);
         }
-        IEnumerator RemoveFireBoost(float boost, float time)
+        IEnumerator RemoveFireBoost(float boost, float time, Color tint)
         {
             yield return new WaitForSeconds(time);
             attackRate *= boost;
+            PromptText prompt = "- Firerate";
+            prompt.color = tint;
+            Message<PromptText>.Raise(prompt);
+        }
+        IEnumerator DoInvincible(float time, Color tint)
+        {
+            StopCoroutine("DoInvulnerab");
+            vulnerable = false;
+            yield return new WaitForSeconds(time);
+            vulnerable = true;
+            PromptText prompt = "- Invincibility";
+            prompt.color = tint;
+            Message<PromptText>.Raise(prompt);
         }
 
         protected override void Die()
